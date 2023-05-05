@@ -5,6 +5,9 @@ const mongoose = require('mongoose')
 const User = mongoose.model("User")
 // 'bcrypt' for password encryption
 const bcrypt = require('bcrypt')
+// 'jwt' for login token
+const jwt = require('jsonwebtoken')
+const { JWT_SECRET } = require("../keys")
 
 // different types of responses:
 // res.send(), res.json()
@@ -77,9 +80,10 @@ router.post("/login", async (req, res) => {
     // compare user-entered password to DB password
     const matchedEncryptedPassword = await bcrypt.compare(password, savedUser.password)
 
-    // give message if successful or not
     if (matchedEncryptedPassword) {
-      return res.json({ message: "successfully signed in" })
+      // create a JWT for login & send if successful
+      const JWToken = jwt.sign({ _id: savedUser._id }, JWT_SECRET)
+      return res.json({ JWToken })
     }
     return res.status(422).json({ error: "Invalid Email or Password" })
   } catch (e) {
