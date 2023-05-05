@@ -6,7 +6,9 @@ const { MONGOURI } = require('./keys')
 
 // import mongoose DB models
 require('./models/user')
-// import routes
+// allow routes to read JSON data
+app.use(express.json())
+// import routes as middleware
 app.use(require("./routes/auth"))
 
 
