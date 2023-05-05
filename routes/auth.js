@@ -13,13 +13,11 @@ const { JWT_SECRET } = require("../keys")
 // res.send(), res.json()
 
 // middlewares
-const customMiddleware = (req, res, next) => {
-  console.log("middleware executed!!")
-  next()
-}
+// will check if the JWT is valid/exists as a header
+const requireLogin = require("../middleware/requireLogin")
 
 // routes with middlewares
-router.get('/', customMiddleware, (req, res) => {
+router.get('/', (req, res) => {
   console.log('HOME ROUTE')
   res.send("hello world")
 })
@@ -82,13 +80,19 @@ router.post("/login", async (req, res) => {
 
     if (matchedEncryptedPassword) {
       // create a JWT for login & send if successful
-      const JWToken = jwt.sign({ _id: savedUser._id }, JWT_SECRET)
-      return res.json({ JWToken })
+      const token = jwt.sign({ _id: savedUser._id }, JWT_SECRET)
+      return res.json({ token })
     }
     return res.status(422).json({ error: "Invalid Email or Password" })
   } catch (e) {
     console.log(e)
   }
+})
+
+// protected routes (w/ middlewares)
+// will only run if it JWT is valid and User data is retrieved
+router.get('/protected', requireLogin, (req, res) => {
+  res.send("hello user")
 })
 
 module.exports = router
