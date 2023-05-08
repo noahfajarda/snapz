@@ -8,7 +8,34 @@ const Post = mongoose.model("Post")
 // will check if the JWT is valid/exists as a header
 const requireLogin = require("../middleware/requireLogin")
 
-// create a post
+// READ/GET all posts
+router.get("/allposts", async (req, res) => {
+  try {
+    // populated 'postedBy' field based on foreign key
+    // second param == fields to include
+    const posts = await Post.find().populate("postedBy", "_id name")
+
+    res.json({ posts })
+  } catch (err) {
+    console.error(err)
+  }
+})
+
+// READ/GET all posts by USER (protected route)
+router.get("/myposts", requireLogin, async (req, res) => {
+  // will use the jwt to get the user's info
+  // jwt will be converted to the 'user' object --> req.user
+  try {
+    const posts = await Post.find({ postedBy: req.user._id })
+      .populate("postedBy", "_id name")
+
+    res.json({ myposts: posts })
+  } catch (err) {
+    console.error(err)
+  }
+})
+
+// CREATE a post
 router.post("/createpost", requireLogin, async (req, res) => {
   try {
     // destructure title & body and validate
@@ -27,7 +54,7 @@ router.post("/createpost", requireLogin, async (req, res) => {
     })
 
     // save post to DB & respond with post
-    const savedPost = await post.save()
+    const savedPost = await post.save();
     res.json({ post: savedPost });
 
   } catch (err) {
