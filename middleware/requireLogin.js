@@ -26,11 +26,9 @@ module.exports = function requireLogin(req, res, next) {
     User.findById(_id).then(userData => {
       // attatch the user data to the request
       req.user = userData
+
+      // continue AFTER retrieving valid user
+      next()
     })
-
-    // continue
-    next()
   })
-
-
 }
