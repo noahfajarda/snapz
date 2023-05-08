@@ -5,18 +5,19 @@ const mongoose = require('mongoose')
 const User = mongoose.model("User")
 // 'bcrypt' for password encryption
 const bcrypt = require('bcrypt')
+// 'jwt' for login token
+const jwt = require('jsonwebtoken')
+const { JWT_SECRET } = require("../keys")
 
 // different types of responses:
 // res.send(), res.json()
 
 // middlewares
-const customMiddleware = (req, res, next) => {
-  console.log("middleware executed!!")
-  next()
-}
+// will check if the JWT is valid/exists as a header
+const requireLogin = require("../middleware/requireLogin")
 
 // routes with middlewares
-router.get('/', customMiddleware, (req, res) => {
+router.get('/', (req, res) => {
   console.log('HOME ROUTE')
   res.send("hello world")
 })
@@ -77,14 +78,21 @@ router.post("/login", async (req, res) => {
     // compare user-entered password to DB password
     const matchedEncryptedPassword = await bcrypt.compare(password, savedUser.password)
 
-    // give message if successful or not
     if (matchedEncryptedPassword) {
-      return res.json({ message: "successfully signed in" })
+      // create a JWT for login & send if successful
+      const token = jwt.sign({ _id: savedUser._id }, JWT_SECRET)
+      return res.json({ token })
     }
     return res.status(422).json({ error: "Invalid Email or Password" })
-  } catch (e) {
-    console.log(e)
+  } catch (err) {
+    console.log(err)
   }
+})
+
+// protected routes (w/ middlewares)
+// will only run if it JWT is valid and User data is retrieved
+router.get('/protected', requireLogin, (req, res) => {
+  res.send("hello user")
 })
 
 module.exports = router
