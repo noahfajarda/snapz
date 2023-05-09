@@ -10,11 +10,11 @@ export default function Login() {
         <input type="text" placeholder="password" />
 
         <button
-          className="btn waves-effect waves-light #448aff blue accent-2"
+          className="btn waves-effect waves-light #448aff blue darken-1"
           type="submit"
           name="action"
         >
-          <i className="material-icons">login</i>
+          Log In
         </button>
         <h5>
           Don't have an account? Click <Link to="/signup">here</Link>!
