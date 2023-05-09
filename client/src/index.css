@@ -39,6 +39,12 @@
   justify-content: center;
 }
 
+.home-card {
+  max-width: 500px;
+  margin: 26px auto;
+  height: max-content;
+}
+
 /* default styling */
 h1 {
   font-size: 2em;
