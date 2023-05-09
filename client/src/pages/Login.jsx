@@ -14,7 +14,7 @@ export default function Login() {
           type="submit"
           name="action"
         >
-          <i className="material-icons">Login</i>
+          <i className="material-icons">login</i>
         </button>
         <h5>
           Don't have an account? Click <Link to="/signup">here</Link>!
