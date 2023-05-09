@@ -1,25 +1,5 @@
 {
-  "name": "instagram-clone",
-  "version": "1.0.0",
-  "description": "",
-  "main": "test.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/noahfajarda/social-media.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/noahfajarda/social-media/issues"
-  },
-  "homepage": "https://github.com/noahfajarda/social-media#readme",
   "dependencies": {
-    "bcrypt": "^5.1.0",
-    "express": "^4.18.2",
-    "jsonwebtoken": "^9.0.0",
-    "mongoose": "^7.1.0"
+    "react-router-dom": "^6.11.1"
   }
 }
