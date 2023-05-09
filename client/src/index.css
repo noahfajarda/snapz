@@ -26,6 +26,39 @@
   box-shadow: 0 1px 0 0 #3f02f7;
 }
 
+/* photos in profile */
+.photo-item {
+  height: 30%;
+  width: 300px;
+  margin: 20px;
+}
+
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* default styling */
+h1 {
+  font-size: 2em;
+}
+h2 {
+  font-size: 1.5em;
+}
+h3 {
+  font-size: 1.17em;
+}
+h4 {
+  font-size: 1em;
+}
+h5 {
+  font-size: 0.83em;
+}
+h6 {
+  font-size: 0.67em;
+}
+
 /* media queries */
 @media (max-width: 1280px) {
   /* font-size for log in logo */
