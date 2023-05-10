@@ -4,3 +4,9 @@ technologies used:
 - react-router-dom
 - bcrypt
 - jwt
+
+WAY TO FIX CORS ERROR when connecting FE to BE:
+FIX THE ERROR FETCHING DB TO THE CLIENT-SIDE PORT
+
+1. add "proxy": "http://localhost:{SERVER-PORT}" to client package.json
+2. restart the server & client

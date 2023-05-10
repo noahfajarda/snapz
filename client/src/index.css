@@ -45,6 +45,13 @@
   height: max-content;
 }
 
+/* for 'toast' error */
+#toast-container {
+  top: 30px !important;
+  left: 20px !important;
+  right: auto !important;
+}
+
 /* default styling */
 h1 {
   font-size: 2em;
