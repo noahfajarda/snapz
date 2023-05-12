@@ -20,4 +20,3 @@ used 'dotenv' for react to store API vars
 
 TODO:
 replace local storage 'setItem' with context variables soon
-move upload photo logic to backend to store dotenv variables
