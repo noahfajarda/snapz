@@ -64,7 +64,7 @@ export default function Signup() {
           navigate("/login");
         }
       })
-      .then((err) => console.log(err));
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -72,6 +72,7 @@ export default function Signup() {
       <div className="card auth-card input-field">
         <h2 className="brand-logo sign-up">Instagram</h2>
         <form onSubmit={handleSignup}>
+          {/* put state variables in inputs */}
           <input
             type="text"
             placeholder="name"
@@ -85,12 +86,11 @@ export default function Signup() {
             onChange={(e) => dispatch({ email: e.target.value })}
           />
           <input
-            type="text"
+            type="password"
             placeholder="password"
             value={state.password}
             onChange={(e) => dispatch({ password: e.target.value })}
           />
-
           <button
             className="btn waves-effect waves-light #448aff blue darken-1"
             type="submit"
