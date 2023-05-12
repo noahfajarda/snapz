@@ -38,9 +38,9 @@ router.get("/myposts", requireLogin, async (req, res) => {
 // CREATE a post
 router.post("/createpost", requireLogin, async (req, res) => {
   try {
-    // destructure title & body and validate
-    const { title, body } = req.body;
-    if (!title || !body) {
+    // destructure title, body, & image url and validate
+    const { title, body, imageUrl } = req.body;
+    if (!title || !body || !imageUrl) {
       return res.status(422).json({ error: "Please Enter All Required Fields" })
     }
 
@@ -50,7 +50,7 @@ router.post("/createpost", requireLogin, async (req, res) => {
     // create new post ASSOCIATING with user
     // user retrieved from 'Authorization' header with JWT
     const post = new Post({
-      title, body, postedBy: req.user
+      title, body, imageUrl, postedBy: req.user
     })
 
     // save post to DB & respond with post

@@ -13,7 +13,7 @@ const postSchema = new mongoose.Schema({
   // will store URL of image
   photo: {
     type: String,
-    default: "no photo"
+    required: true
   },
   // reference/foreign key
   postedBy: {
