@@ -16,6 +16,8 @@ CLOUDINARY (upload images/files to db):
 
 under github account
 settings --> upload --> "enable unsigned uploading" --> add upload preset
+used 'dotenv' for react to store API vars
 
 TODO:
 replace local storage 'setItem' with context variables soon
+move upload photo logic to backend to store dotenv variables

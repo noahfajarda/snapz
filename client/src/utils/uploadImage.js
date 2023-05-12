@@ -1,5 +1,7 @@
 // inform user post has been created
 import M from "materialize-css";
+// import dotenv variables
+const { REACT_APP_UPLOAD_PRESET, REACT_APP_CLOUD_NAME } = process.env;
 
 // uploads image to cloudinary.com
 // link to view images = https://console.cloudinary.com/console/c-a93be4c19875cf5fd32251bfff624e/media_library/search?q=
@@ -7,12 +9,14 @@ import M from "materialize-css";
 export async function postDetails(image) {
   const data = new FormData();
   data.append("file", image);
-  data.append("upload_preset", "social-media-image-upload");
-  data.append("cloud_name", "fajarda1storage");
+  data.append("upload_preset", REACT_APP_UPLOAD_PRESET);
+  data.append("cloud_name", REACT_APP_CLOUD_NAME);
+  // specify folder
+  data.append("folder", "Instagram-Clone");
 
   // API ROUTE = https://api.cloudinary.com/v1_1/fajarda1storage/image/upload
   try {
-    const response = await fetch("https://api.cloudinary.com/v1_1/fajarda1storage/image/upload", {
+    const response = await fetch(`https://api.cloudinary.com/v1_1/${REACT_APP_CLOUD_NAME}/image/upload`, {
       method: "POST",
       body: data,
     })
