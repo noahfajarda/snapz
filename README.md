@@ -4,6 +4,7 @@ technologies used:
 - react-router-dom
 - bcrypt
 - jwt
+- cloudinary
 
 WAY TO FIX CORS ERROR when connecting FE to BE:
 FIX THE ERROR FETCHING DB TO THE CLIENT-SIDE PORT
@@ -15,3 +16,6 @@ CLOUDINARY (upload images/files to db):
 
 under github account
 settings --> upload --> "enable unsigned uploading" --> add upload preset
+
+TODO:
+replace local storage 'setItem' with context variables soon

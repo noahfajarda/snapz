@@ -55,6 +55,10 @@ export default function Login() {
             classes: "#c62828 red darken-3",
           });
         } else {
+          // set local storage items for 'jwt' & user data
+          localStorage.setItem("jwt", data.token);
+          localStorage.setItem("user", JSON.stringify(data.user));
+
           // show pop-up
           M.toast({
             html: "Successfully Signed in",

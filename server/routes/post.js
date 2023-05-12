@@ -50,7 +50,7 @@ router.post("/createpost", requireLogin, async (req, res) => {
     // create new post ASSOCIATING with user
     // user retrieved from 'Authorization' header with JWT
     const post = new Post({
-      title, body, imageUrl, postedBy: req.user
+      title, body, photo: imageUrl, postedBy: req.user
     })
 
     // save post to DB & respond with post

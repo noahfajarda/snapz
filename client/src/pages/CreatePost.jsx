@@ -1,9 +1,6 @@
-import React, { useReducer } from "react";
+import React, { useEffect, useReducer } from "react";
 import { useNavigate } from "react-router-dom";
-import postDetails from "../utils/uploadImage";
-
-// inform user post has been created
-import M from "materialize-css";
+import { postDetails, createPost } from "../utils/uploadImage";
 
 // WAY TO INPUT FILES
 function FileInput({ image, dispatch }) {
@@ -27,6 +24,7 @@ function FileInput({ image, dispatch }) {
 export default function CreatePost() {
   const navigate = useNavigate();
 
+  // set form state variables with 'useReducer'
   const [state, dispatch] = useReducer(
     (state, action) => ({
       ...state,
@@ -40,51 +38,23 @@ export default function CreatePost() {
     }
   );
 
+  // post with data will be created ONLY WHEN imageUrl is set
+  useEffect(() => {
+    if (!state.imageUrl) return;
+
+    createPost(state, navigate);
+  }, [state.imageUrl, navigate, state]);
+
   const handlePostSubmit = async (e) => {
+    e.preventDefault();
     try {
-      e.preventDefault();
       // post image to cloudinary DB
       const imageUrl = await postDetails(state.image);
 
-      // set image url to form state variable
+      // set image url to form state variable & activate useEffect
       dispatch({ imageUrl });
-
-      // post data to server
-      fetch("/createpost", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          // attatch title, body, & imageUul
-          title: state.title,
-          body: state.body,
-          imageUrl: state.imageUrl,
-        }),
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          console.log(data);
-          // handle error
-          if (data.error) {
-            // show pop-up
-            M.toast({
-              html: data.error,
-              classes: "#c62828 red darken-3",
-            });
-          } else {
-            // show pop-up
-            M.toast({
-              html: "Created Post Successfully",
-              classes: "#43a047 green darken-1",
-            });
-            // navigate to home screen
-            navigate("/");
-          }
-        })
-        .catch((err) => console.log(err));
-    } catch (e) {
-      console.error(e);
+    } catch (err) {
+      console.error(err);
     }
   };
 
@@ -101,6 +71,7 @@ export default function CreatePost() {
       >
         Create Post
         <form onSubmit={handlePostSubmit}>
+          {/* title & body state variables */}
           <input
             type="text"
             placeholder="title"
