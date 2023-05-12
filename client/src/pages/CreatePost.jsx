@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { postDetails, createPost } from "../utils/uploadImage";
 
 // WAY TO INPUT FILES
-function FileInput({ image, dispatch }) {
+function FileInput({ dispatch }) {
   return (
     <div className="file-field input-field">
       <div className="btn #64b5f6 blue darken-1">
@@ -86,8 +86,8 @@ export default function CreatePost() {
             value={state.body}
             onChange={(e) => dispatch({ body: e.target.value })}
           />
-          {/* FILE INPUT */}
-          <FileInput image={state.image} dispatch={dispatch} />
+          {/* FILE INPUT (just pass in dispatch to change the image) */}
+          <FileInput dispatch={dispatch} />
           <button
             type="submit"
             className="btn waves-effect waves-light #64b5f6 blue darken-1"
