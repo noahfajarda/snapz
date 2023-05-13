@@ -8,6 +8,7 @@ import { UserContext } from "../App";
 export default function Navbar() {
   const { state, dispatch } = useContext(UserContext);
 
+  // if user context data object exists, user is logged in
   let loggedIn = state?._id ? true : undefined;
 
   // pages and bool if shown if logged in

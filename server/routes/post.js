@@ -9,7 +9,7 @@ const Post = mongoose.model("Post")
 const requireLogin = require("../middleware/requireLogin")
 
 // READ/GET all posts
-router.get("/allposts", async (req, res) => {
+router.get("/allposts", requireLogin, async (req, res) => {
   try {
     // populated 'postedBy' field based on foreign key
     // second param == fields to include
