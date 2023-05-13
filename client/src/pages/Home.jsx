@@ -2,11 +2,16 @@ import React, { useEffect, useState } from "react";
 
 function Post({ singlePost }) {
   // display 'singlePost' data with 'Post' component
+  console.log(singlePost);
   return (
     <div className="card home-card">
       <h5>{singlePost.postedBy.name}</h5>
       <div className="card-image">
         <img src={singlePost.photo} alt="background" />
+        {/* video */}
+        <video width="500px" height="500px" controls="controls">
+          <source src={singlePost.photo} type="video/mp4" />
+        </video>
         <div className="card-content">
           {/* icon from materialize */}
           <i className="material-icons" style={{ color: "red" }}>

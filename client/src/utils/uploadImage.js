@@ -14,7 +14,8 @@ export async function postDetails(image) {
   // specify folder
   data.append("folder", "Instagram-Clone");
 
-  // API ROUTE = https://api.cloudinary.com/v1_1/fajarda1storage/image/upload
+  // API ROUTE = https://api.cloudinary.com/v1_1/${REACT_APP_CLOUD_NAME}/image/upload
+  // .../video/... == mp4 ONLY
   try {
     const response = await fetch(`https://api.cloudinary.com/v1_1/${REACT_APP_CLOUD_NAME}/image/upload`, {
       method: "POST",
