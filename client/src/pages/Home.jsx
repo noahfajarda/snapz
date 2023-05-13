@@ -35,8 +35,11 @@ export default function Home() {
     })
       .then((res) => res.json())
       .then((result) => {
-        // latest go on top
-        if (result.length !== 0) result.posts.reverse();
+        // check if user data is valid
+        if (!("error" in result) && result.length !== 0) {
+          // latest go on top
+          result.posts.reverse();
+        }
         setPostsData(result.posts);
       });
   }, []);
