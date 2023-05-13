@@ -1,6 +1,11 @@
-import React from "react";
+import React, { useEffect, useReducer, createContext, useContext } from "react";
 // routing == react-router-dom
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  useNavigate,
+} from "react-router-dom";
 
 // components
 import Navbar from "./components/Navbar";
@@ -12,19 +17,55 @@ import Signup from "./pages/Signup";
 import Profile from "./pages/Profile";
 import CreatePost from "./pages/CreatePost";
 
-function App() {
+// custom reducer hook
+import { initialState, reducer } from "./reducer/userReducer";
+
+// create/export context
+export const UserContext = createContext();
+
+// separate component to access 'useNavigate'
+const Routing = () => {
+  const navigate = useNavigate();
+  const User = useContext(UserContext);
+
+  // on initial mount, check for existing user data from potential log in
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    // reroute to login if user data isn't present
+    if (user) {
+      // set user data as payload for user context
+      User.dispatch({ type: "USER", payload: user });
+      navigate("/");
+      return;
+    }
+    navigate("/login");
+  }, []);
+
   return (
-    <Router>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/create" element={<CreatePost />} />
-        <Route path="*" element={<Home />} />
-      </Routes>
-    </Router>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/signup" element={<Signup />} />
+      <Route path="/profile" element={<Profile />} />
+      <Route path="/create" element={<CreatePost />} />
+      <Route path="*" element={<Home />} />
+    </Routes>
+  );
+};
+
+function App() {
+  // userReducer custom hook
+  const [state, dispatch] = useReducer(reducer, initialState);
+
+  return (
+    // wrap in context provider to allow components to have access to variables
+    <UserContext.Provider value={{ state, dispatch }}>
+      <Router>
+        <Navbar />
+        <Routing />
+      </Router>
+    </UserContext.Provider>
   );
 }
 

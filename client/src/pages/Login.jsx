@@ -1,12 +1,18 @@
-import React, { useReducer } from "react";
+import React, { useReducer, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 // import validate email util
 import validateEmail from "../utils/validateEmail";
+
+// retrieve user data from user context wrapper
+import { UserContext } from "../App";
 
 // import materialize to handle error
 import M from "materialize-css";
 
 export default function Login() {
+  // retrieve  'state' & 'dispatch' for user context
+  const User = useContext(UserContext);
+
   const navigate = useNavigate();
   // useReducer to manage form state
   const [state, dispatch] = useReducer(
@@ -58,6 +64,9 @@ export default function Login() {
           // set local storage items for 'jwt' & user data
           localStorage.setItem("jwt", data.token);
           localStorage.setItem("user", JSON.stringify(data.user));
+
+          // dispatch user data
+          User.dispatch({ type: "USER", payload: data.user });
 
           // show pop-up
           M.toast({
