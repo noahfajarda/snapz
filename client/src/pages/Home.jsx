@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 
 function Post({ singlePost }) {
   // display 'singlePost' data with 'Post' component
-  console.log(singlePost);
   return (
     <div className="card home-card">
       <h5>{singlePost.postedBy.name}</h5>
@@ -43,7 +42,6 @@ export default function Home() {
         setPostsData(result.posts);
       });
   }, []);
-  console.log(postsdata);
 
   return (
     <React.Fragment>
