@@ -2,16 +2,25 @@ import React, { useEffect, useState } from "react";
 
 function Post({ singlePost }) {
   // display 'singlePost' data with 'Post' component
-  console.log(singlePost);
   return (
     <div className="card home-card">
       <h5>{singlePost.postedBy.name}</h5>
       <div className="card-image">
-        <img src={singlePost.photo} alt="background" />
-        {/* video */}
-        <video width="500px" height="500px" controls="controls">
-          <source src={singlePost.photo} type="video/mp4" />
-        </video>
+        {/* conditional if post is an image */}
+        {singlePost.type === "Image" ? (
+          <img src={singlePost.asset} alt="background" />
+        ) : (
+          <div></div>
+        )}
+        {/* conditional if post is a video */}
+        {singlePost.type === "Video" ? (
+          <video width="500px" height="500px" controls="controls">
+            {/* video */}
+            <source src={singlePost.asset} type="video/mp4" />
+          </video>
+        ) : (
+          <div></div>
+        )}
         <div className="card-content">
           {/* icon from materialize */}
           <i className="material-icons" style={{ color: "red" }}>
