@@ -10,10 +10,15 @@ const postSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  // will store URL of image
-  photo: {
+  // will store URL of asset
+  asset: {
     type: String,
-    default: "no photo"
+    required: true
+  },
+  // type of asset
+  type: {
+    type: String,
+    required: true
   },
   // reference/foreign key
   postedBy: {

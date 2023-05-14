@@ -9,7 +9,7 @@ const Post = mongoose.model("Post")
 const requireLogin = require("../middleware/requireLogin")
 
 // READ/GET all posts
-router.get("/allposts", async (req, res) => {
+router.get("/allposts", requireLogin, async (req, res) => {
   try {
     // populated 'postedBy' field based on foreign key
     // second param == fields to include
@@ -38,9 +38,10 @@ router.get("/myposts", requireLogin, async (req, res) => {
 // CREATE a post
 router.post("/createpost", requireLogin, async (req, res) => {
   try {
-    // destructure title & body and validate
-    const { title, body } = req.body;
-    if (!title || !body) {
+    // destructure title, body, & image url and validate
+    const { title, body, assetUrl, type } = req.body;
+
+    if (!title || !body || !assetUrl || !type) {
       return res.status(422).json({ error: "Please Enter All Required Fields" })
     }
 
@@ -50,7 +51,7 @@ router.post("/createpost", requireLogin, async (req, res) => {
     // create new post ASSOCIATING with user
     // user retrieved from 'Authorization' header with JWT
     const post = new Post({
-      title, body, postedBy: req.user
+      title, body, asset: assetUrl, type, postedBy: req.user
     })
 
     // save post to DB & respond with post

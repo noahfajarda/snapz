@@ -21,7 +21,8 @@
 }
 
 /* outline for focused input field */
-.input-field input[type="text"]:focus {
+.input-field input[type="text"]:focus,
+.input-field input[type="password"]:focus {
   border-bottom: 1px solid #3f02f7 !important;
   box-shadow: 0 1px 0 0 #3f02f7;
 }
@@ -37,6 +38,19 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+}
+
+.home-card {
+  max-width: 500px;
+  margin: 26px auto;
+  height: max-content;
+}
+
+/* for 'toast' error */
+#toast-container {
+  top: 30px !important;
+  left: 20px !important;
+  right: auto !important;
 }
 
 /* default styling */
