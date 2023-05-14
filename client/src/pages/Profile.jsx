@@ -1,6 +1,29 @@
-import React from "react";
+import React, { useEffect, useState, useContext } from "react";
+import { UserContext } from "../App";
 
 export default function Profile() {
+  const [myPosts, setMyPosts] = useState([]);
+  // retrieve user data from context
+  const { state, dispatch } = useContext(UserContext);
+
+  useEffect(() => {
+    fetch(`myposts`, {
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("jwt"),
+      },
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        // check if user data is valid
+        if (!("error" in result) && result.length !== 0) {
+          // latest go on top
+          result.myposts.reverse();
+        }
+
+        setMyPosts(result.myposts);
+      });
+  }, []);
+
   return (
     <div style={{ maxWidth: "1080px", margin: "0px auto" }}>
       <div
@@ -20,7 +43,7 @@ export default function Profile() {
           />
         </div>
         <div>
-          <h4>Noah Fajarda</h4>
+          <h4>{state ? state.name : "loading"}</h4>
           <div
             style={{
               display: "flex",
@@ -36,31 +59,14 @@ export default function Profile() {
       </div>
 
       <div className="gallery">
-        <img
-          className="photo-item"
-          alt="post"
-          src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8MXw3NjA4Mjc3NHx8ZW58MHx8fHw%3D&w=1000&q=80"
-        />
-        <img
-          className="photo-item"
-          alt="post"
-          src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8MXw3NjA4Mjc3NHx8ZW58MHx8fHw%3D&w=1000&q=80"
-        />
-        <img
-          className="photo-item"
-          alt="post"
-          src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8MXw3NjA4Mjc3NHx8ZW58MHx8fHw%3D&w=1000&q=80"
-        />
-        <img
-          className="photo-item"
-          alt="post"
-          src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8MXw3NjA4Mjc3NHx8ZW58MHx8fHw%3D&w=1000&q=80"
-        />
-        <img
-          className="photo-item"
-          alt="post"
-          src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8MXw3NjA4Mjc3NHx8ZW58MHx8fHw%3D&w=1000&q=80"
-        />
+        {myPosts.map((item, idx) => (
+          <img
+            key={idx}
+            className="photo-item"
+            alt="might be a video"
+            src={item.asset}
+          />
+        ))}
       </div>
     </div>
   );

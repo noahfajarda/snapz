@@ -36,7 +36,6 @@ const Routing = () => {
     if (user) {
       // set user data as payload for user context
       User.dispatch({ type: "USER", payload: user });
-      navigate("/");
       return;
     }
     navigate("/login");
