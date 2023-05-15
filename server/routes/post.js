@@ -72,6 +72,7 @@ router.put("/like", requireLogin, async (req, res) => {
     }, {
       new: true
     })
+    // respond with the liked post
     res.json(likedPost)
   } catch (err) {
     console.log(err)
@@ -82,13 +83,14 @@ router.put("/like", requireLogin, async (req, res) => {
 // REMOVE a like (associated user) from a post
 router.put("/unlike", requireLogin, async (req, res) => {
   try {
-    const likedPost = await Post.findByIdAndUpdate(req.body.postId, {
+    const unlikedPost = await Post.findByIdAndUpdate(req.body.postId, {
       // the LOGGED IN USER can be the only one to unlike the post
       $pull: { likes: req.user._id }
     }, {
       new: true
     })
-    res.json(likedPost)
+    // respond with the unliked post
+    res.json(unlikedPost)
   } catch (err) {
     console.log(err)
     return res.status(422).json({ error: err })
