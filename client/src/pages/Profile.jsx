@@ -51,7 +51,7 @@ export default function Profile() {
               width: "108%",
             }}
           >
-            <h6>40 posts</h6>
+            <h6>{myPosts.length} posts</h6>
             <h6>40 followers</h6>
             <h6>40 following</h6>
           </div>

@@ -1,6 +1,53 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+
+// retrieve user with context
+import { UserContext } from "../App";
 
 function Post({ singlePost }) {
+  const [likeCount, setLikeCount] = useState(singlePost.likes.length);
+  const [userLiked, setUserLiked] = useState(false);
+  const { state, dispatch } = useContext(UserContext);
+
+  const likePost = (id) => {
+    fetch("/like", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("jwt"),
+      },
+      body: JSON.stringify({
+        postId: id,
+      }),
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        setLikeCount(result.likes.length);
+        setUserLiked(true);
+      });
+  };
+
+  const unlikePost = (id) => {
+    fetch("/unlike", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("jwt"),
+      },
+      body: JSON.stringify({
+        postId: id,
+      }),
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        setLikeCount(result.likes.length);
+        setUserLiked(false);
+      });
+  };
+
+  useEffect(() => {
+    if (singlePost.likes.includes(state._id)) setUserLiked(true);
+  }, []);
+
   // display 'singlePost' data with 'Post' component
   return (
     <div className="card home-card">
@@ -26,6 +73,22 @@ function Post({ singlePost }) {
           <i className="material-icons" style={{ color: "red" }}>
             favorite
           </i>
+          {userLiked ? (
+            <i
+              className="material-icons unlike"
+              onClick={() => unlikePost(singlePost._id)}
+            >
+              thumb_down
+            </i>
+          ) : (
+            <i
+              className="material-icons like"
+              onClick={() => likePost(singlePost._id)}
+            >
+              thumb_up
+            </i>
+          )}
+          <h6>{likeCount} likes</h6>
           <h6>{singlePost.title}</h6>
           <p>{singlePost.body}</p>
           <input type="text" placeholder="add a comment" />
