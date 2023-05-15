@@ -8,40 +8,50 @@ function Post({ singlePost }) {
   const [userLiked, setUserLiked] = useState(false);
   const { state, dispatch } = useContext(UserContext);
 
-  const likePost = (id) => {
-    fetch("/like", {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem("jwt"),
-      },
-      body: JSON.stringify({
-        postId: id,
-      }),
-    })
-      .then((res) => res.json())
-      .then((result) => {
-        setLikeCount(result.likes.length);
-        setUserLiked(true);
+  const likePost = async (id) => {
+    try {
+      // fetch call to '/like' route to like a post
+      const like = await fetch("/like", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("jwt"),
+        },
+        body: JSON.stringify({
+          postId: id,
+        }),
       });
+      const likeResponse = await like.json();
+
+      // set like count to length of likes array & set userLiked to 'true'
+      setLikeCount(likeResponse.likes.length);
+      setUserLiked(true);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
-  const unlikePost = (id) => {
-    fetch("/unlike", {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem("jwt"),
-      },
-      body: JSON.stringify({
-        postId: id,
-      }),
-    })
-      .then((res) => res.json())
-      .then((result) => {
-        setLikeCount(result.likes.length);
-        setUserLiked(false);
+  const unlikePost = async (id) => {
+    try {
+      // fetch call to '/unlike' route to like a post
+      const unlike = await fetch("/unlike", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("jwt"),
+        },
+        body: JSON.stringify({
+          postId: id,
+        }),
       });
+      const unlikeResponse = await unlike.json();
+
+      // set like count to length of likes array & set userLiked to 'false'
+      setLikeCount(unlikeResponse.likes.length);
+      setUserLiked(false);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   useEffect(() => {
