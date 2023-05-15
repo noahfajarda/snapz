@@ -87,7 +87,11 @@ function Post({ singlePost }) {
               commentOnPost(e.target[0].value, singlePost._id, setComments);
             }}
           >
-            <input type="text" placeholder="add a comment" />
+            <input
+              type="text"
+              placeholder="add a comment"
+              id={`${singlePost._id}-comment-box`}
+            />
           </form>
         </div>
       </div>
