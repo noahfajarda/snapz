@@ -66,24 +66,27 @@ const unlikePost = async (postId, setLikeCount, setUserLiked) => {
 
 const commentOnPost = async (text, postId, setComments) => {
   try {
-    // comment API call
-    const commentData = await fetch("/comment", {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem("jwt"),
-      },
-      body: JSON.stringify({
-        postId,
-        text,
-      }),
-    });
-    const commentResponse = await commentData.json();
-    // set comments to comments
-    setComments(commentResponse.comments);
+    if (text.length !== 0) {
+      // comment API call
+      const commentData = await fetch("/comment", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("jwt"),
+        },
+        body: JSON.stringify({
+          postId,
+          text,
+        }),
+      });
+      const commentResponse = await commentData.json();
+      // set comments to comments
+      setComments(commentResponse.comments);
 
-    const commentBoxEl = document.getElementById(`${postId}-comment-box`);
-    commentBoxEl.value = "";
+      // reset comment input element
+      const commentBoxEl = document.getElementById(`${postId}-comment-box`);
+      commentBoxEl.value = "";
+    }
 
   } catch (err) {
     console.error(err);
