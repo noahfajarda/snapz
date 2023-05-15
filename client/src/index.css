@@ -53,6 +53,12 @@
   right: auto !important;
 }
 
+/* likes */
+.unlike,
+.like {
+  cursor: pointer;
+}
+
 /* default styling */
 h1 {
   font-size: 2em;
