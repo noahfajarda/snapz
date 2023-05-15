@@ -20,6 +20,12 @@ const postSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  likes: [
+    {
+      // type: ARRAY of USERS
+      type: ObjectId, ref: "User"
+    }
+  ],
   // reference/foreign key
   postedBy: {
     type: ObjectId,
