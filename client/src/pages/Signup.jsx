@@ -21,7 +21,7 @@ export default function Signup() {
     }
   );
 
-  const handleSignup = (e) => {
+  const handleSignup = async (e) => {
     e.preventDefault();
 
     // check if email is valid in format
@@ -33,38 +33,40 @@ export default function Signup() {
       return;
     }
 
-    // submit signup data to DB
-    fetch("/signup", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name: state.name,
-        password: state.password,
-        email: state.email,
-      }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        // handle error
-        if (data.error) {
-          // show pop-up
-          M.toast({
-            html: data.error,
-            classes: "#c62828 red darken-3",
-          });
-        } else {
-          // show pop-up
-          M.toast({
-            html: data.message,
-            classes: "#43a047 green darken-1",
-          });
-          // navigate back to login
-          navigate("/login");
-        }
-      })
-      .catch((err) => console.log(err));
+    try {
+      // submit signup data to DB
+      const signupData = await fetch("/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: state.name,
+          password: state.password,
+          email: state.email,
+        }),
+      });
+      const signupResponse = await signupData.json();
+
+      // handle error
+      if (signupResponse.error) {
+        // show pop-up
+        M.toast({
+          html: signupResponse.error,
+          classes: "#c62828 red darken-3",
+        });
+      } else {
+        // show pop-up
+        M.toast({
+          html: signupResponse.message,
+          classes: "#43a047 green darken-1",
+        });
+        // navigate back to login
+        navigate("/login");
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (

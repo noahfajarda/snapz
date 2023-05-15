@@ -11,7 +11,7 @@ function Post({ singlePost }) {
   const likePost = async (id) => {
     try {
       // fetch call to '/like' route to like a post
-      const like = await fetch("/like", {
+      const likeData = await fetch("/like", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -21,7 +21,7 @@ function Post({ singlePost }) {
           postId: id,
         }),
       });
-      const likeResponse = await like.json();
+      const likeResponse = await likeData.json();
 
       // set like count to length of likes array & set userLiked to 'true'
       setLikeCount(likeResponse.likes.length);
@@ -34,7 +34,7 @@ function Post({ singlePost }) {
   const unlikePost = async (id) => {
     try {
       // fetch call to '/unlike' route to like a post
-      const unlike = await fetch("/unlike", {
+      const unlikeData = await fetch("/unlike", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -44,7 +44,7 @@ function Post({ singlePost }) {
           postId: id,
         }),
       });
-      const unlikeResponse = await unlike.json();
+      const unlikeResponse = await unlikeData.json();
 
       // set like count to length of likes array & set userLiked to 'false'
       setLikeCount(unlikeResponse.likes.length);
@@ -54,6 +54,7 @@ function Post({ singlePost }) {
     }
   };
 
+  // set the post to 'liked' if user already liked the post
   useEffect(() => {
     if (singlePost.likes.includes(state._id)) setUserLiked(true);
   }, []);
