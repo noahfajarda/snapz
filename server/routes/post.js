@@ -13,7 +13,14 @@ router.get("/allposts", requireLogin, async (req, res) => {
   try {
     // populated 'postedBy' field based on foreign key
     // second param == fields to include
-    const posts = await Post.find().populate("postedBy", "_id name")
+    const posts = await Post.find().populate("postedBy", "_id name").populate({
+      path: 'comments',
+      populate: {
+        // populate each 'User' for comments
+        path: 'postedBy',
+        model: 'User'
+      }
+    })
 
     res.json({ posts })
   } catch (err) {
@@ -91,6 +98,32 @@ router.put("/unlike", requireLogin, async (req, res) => {
     })
     // respond with the unliked post
     res.json(unlikedPost)
+  } catch (err) {
+    console.log(err)
+    return res.status(422).json({ error: err })
+  }
+})
+
+// ADD a comment (associated user) to a post
+router.put("/comment", requireLogin, async (req, res) => {
+  try {
+    // create comment by associating text & comment user
+    const comment = {
+      text: req.body.text,
+      postedBy: req.user._id
+    }
+
+    const commentedPost = await Post.findByIdAndUpdate(req.body.postId, {
+      // the LOGGED IN USER can be the only one to comment on the post
+      $push: { comments: comment }
+    }, {
+      new: true
+    })
+      // populate the comment data with user_id & name
+      .populate("comments.postedBy", "_id name")
+
+    // respond with the unliked post
+    res.json(commentedPost)
   } catch (err) {
     console.log(err)
     return res.status(422).json({ error: err })

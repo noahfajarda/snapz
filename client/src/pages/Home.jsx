@@ -3,59 +3,26 @@ import React, { useEffect, useState, useContext } from "react";
 // retrieve user with context
 import { UserContext } from "../App";
 
+// API CALLS
+import { retrieveAllPosts } from "../utils/APICalls/HomeAPICalls";
+import {
+  likePost,
+  unlikePost,
+  commentOnPost,
+} from "../utils/APICalls/HomeAPICalls";
+
 function Post({ singlePost }) {
+  // state variables
   const [likeCount, setLikeCount] = useState(singlePost.likes.length);
   const [userLiked, setUserLiked] = useState(false);
+  const [comments, setComments] = useState(singlePost.comments);
+
+  // retrieve 'logged-in user' data
   const { state, dispatch } = useContext(UserContext);
-
-  const likePost = async (id) => {
-    try {
-      // fetch call to '/like' route to like a post
-      const likeData = await fetch("/like", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + localStorage.getItem("jwt"),
-        },
-        body: JSON.stringify({
-          postId: id,
-        }),
-      });
-      const likeResponse = await likeData.json();
-
-      // set like count to length of likes array & set userLiked to 'true'
-      setLikeCount(likeResponse.likes.length);
-      setUserLiked(true);
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
-  const unlikePost = async (id) => {
-    try {
-      // fetch call to '/unlike' route to like a post
-      const unlikeData = await fetch("/unlike", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + localStorage.getItem("jwt"),
-        },
-        body: JSON.stringify({
-          postId: id,
-        }),
-      });
-      const unlikeResponse = await unlikeData.json();
-
-      // set like count to length of likes array & set userLiked to 'false'
-      setLikeCount(unlikeResponse.likes.length);
-      setUserLiked(false);
-    } catch (err) {
-      console.error(err);
-    }
-  };
 
   // set the post to 'liked' if user already liked the post
   useEffect(() => {
+    // set user liked external function
     if (singlePost.likes.includes(state._id)) setUserLiked(true);
   }, []);
 
@@ -84,17 +51,22 @@ function Post({ singlePost }) {
           <i className="material-icons" style={{ color: "red" }}>
             favorite
           </i>
+          {/* display different icons based on if user liked post */}
           {userLiked ? (
             <i
               className="material-icons unlike"
-              onClick={() => unlikePost(singlePost._id)}
+              onClick={() =>
+                unlikePost(singlePost._id, setLikeCount, setUserLiked)
+              }
             >
               thumb_down
             </i>
           ) : (
             <i
               className="material-icons like"
-              onClick={() => likePost(singlePost._id)}
+              onClick={() =>
+                likePost(singlePost._id, setLikeCount, setUserLiked)
+              }
             >
               thumb_up
             </i>
@@ -102,7 +74,21 @@ function Post({ singlePost }) {
           <h6>{likeCount} likes</h6>
           <h6>{singlePost.title}</h6>
           <p>{singlePost.body}</p>
-          <input type="text" placeholder="add a comment" />
+          {/* iterate through comments to display */}
+          {comments.map((comment) => (
+            <h6 key={comment._id}>
+              <span style={{ fontWeight: "500" }}>{comment.postedBy.name}</span>{" "}
+              {comment.text}
+            </h6>
+          ))}
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              commentOnPost(e.target[0].value, singlePost._id, setComments);
+            }}
+          >
+            <input type="text" placeholder="add a comment" />
+          </form>
         </div>
       </div>
     </div>
@@ -115,20 +101,8 @@ export default function Home() {
 
   // retrieve 'posts' data from DB
   useEffect(() => {
-    fetch("/allposts", {
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem("jwt"),
-      },
-    })
-      .then((res) => res.json())
-      .then((result) => {
-        // check if user data is valid
-        if (!("error" in result) && result.length !== 0) {
-          // latest go on top
-          result.posts.reverse();
-        }
-        setPostsData(result.posts);
-      });
+    // set 'postsdata' to all posts
+    retrieveAllPosts(setPostsData);
   }, []);
 
   return (

@@ -26,6 +26,14 @@ const postSchema = new mongoose.Schema({
       type: ObjectId, ref: "User"
     }
   ],
+  comments: [{
+    text: String,
+    // reference/foreign key
+    postedBy: {
+      type: ObjectId,
+      ref: "User"
+    }
+  }],
   // reference/foreign key
   postedBy: {
     type: ObjectId,

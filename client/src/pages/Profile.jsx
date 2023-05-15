@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import { UserContext } from "../App";
+import { retrieveProfilePosts } from "../utils/APICalls/ProfileAPICalls";
 
 export default function Profile() {
   const [myPosts, setMyPosts] = useState([]);
@@ -7,21 +8,8 @@ export default function Profile() {
   const { state, dispatch } = useContext(UserContext);
 
   useEffect(() => {
-    fetch(`myposts`, {
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem("jwt"),
-      },
-    })
-      .then((res) => res.json())
-      .then((result) => {
-        // check if user data is valid
-        if (!("error" in result) && result.length !== 0) {
-          // latest go on top
-          result.myposts.reverse();
-        }
-
-        setMyPosts(result.myposts);
-      });
+    // retrieve posts data
+    retrieveProfilePosts(setMyPosts);
   }, []);
 
   return (
@@ -59,6 +47,7 @@ export default function Profile() {
       </div>
 
       <div className="gallery">
+        {/* iterate through posts data */}
         {myPosts.map((item, idx) => (
           <img
             key={idx}

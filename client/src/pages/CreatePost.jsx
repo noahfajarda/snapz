@@ -1,6 +1,9 @@
 import React, { useEffect, useReducer, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { postDetails, createPost } from "../utils/uploadImage";
+import {
+  postDetails,
+  createPost,
+} from "../utils/APICalls/CreatePostAPICalls/uploadImage";
 import FileTypeDropdown from "../components/FileTypeDropdown/FileTypeDropdown";
 
 // WAY TO INPUT FILES
