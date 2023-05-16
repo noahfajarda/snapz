@@ -1,3 +1,5 @@
+import M from "materialize-css";
+
 // ALL POSTS
 const retrieveAllPosts = (setPostsData) => {
   fetch("/allposts", {
@@ -86,6 +88,12 @@ const commentOnPost = async (text, postId, setComments) => {
       // reset comment input element
       const commentBoxEl = document.getElementById(`${postId}-comment-box`);
       commentBoxEl.value = "";
+
+      // show pop-up
+      M.toast({
+        html: "Successfully Added Comment!",
+        classes: "#43a047 green darken-1",
+      });
     }
 
   } catch (err) {
@@ -93,4 +101,51 @@ const commentOnPost = async (text, postId, setComments) => {
   }
 };
 
-export { retrieveAllPosts, likePost, unlikePost, commentOnPost }
+const deletePost = async (postId, postsData, setPostsData) => {
+  try {
+    // fetch call to delete post
+    const postToDelete = await fetch(`/deletepost/${postId}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("jwt"),
+      },
+    })
+    const deletePostResponse = await postToDelete.json();
+
+    // update data with deleted post
+    const newData = postsData.filter((item) => item._id !== deletePostResponse._id);
+    setPostsData(newData);
+
+    // show pop-up
+    M.toast({
+      html: "Successfully Deleted Post!",
+      classes: "#43a047 green darken-1",
+    });
+
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+const deleteComment = (postId, commentId, setComments) => {
+  fetch(`/deletecomment/${postId}/${commentId}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + localStorage.getItem("jwt"),
+    },
+  })
+    .then((res) => res.json())
+    .then((result) => {
+      setComments(result.comments);
+
+      // show pop-up
+      M.toast({
+        html: "Successfully Deleted Comment!",
+        classes: "#43a047 green darken-1",
+      });
+    });
+};
+
+export { retrieveAllPosts, likePost, unlikePost, commentOnPost, deletePost, deleteComment }
