@@ -53,6 +53,23 @@
   right: auto !important;
 }
 
+/* likes & delete */
+.unlike,
+.like,
+.delete {
+  cursor: pointer;
+}
+
+/* hover transition for button */
+button.bg-sky-300 {
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+button.bg-sky-300:hover {
+  background-color: rgb(76, 170, 191);
+  color: white;
+}
+
 /* default styling */
 h1 {
   font-size: 2em;

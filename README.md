@@ -20,3 +20,4 @@ used 'dotenv' for react to store API vars
 
 TODO:
 replace local storage 'setItem' with context variables soon
+be able to sign in with email OR username
