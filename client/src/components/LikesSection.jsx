@@ -9,7 +9,7 @@ export default function LikesSection({ singlePost, state }) {
   useEffect(() => {
     // set user liked external function
     if (singlePost.likes.includes(state._id)) setUserLiked(true);
-  }, []);
+  }, [singlePost.likes, state._id]);
 
   return (
     <>
