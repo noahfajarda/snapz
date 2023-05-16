@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import { UserContext } from "../App";
 import { retrieveProfilePosts } from "../utils/APICalls/ProfileAPICalls";
 
-export default function Profile() {
+export default function MyProfile() {
   const [myPosts, setMyPosts] = useState([]);
   // retrieve user data from context
   const { state, dispatch } = useContext(UserContext);

@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import { UserContext } from "../App";
-import { retrieveProfilePosts } from "../utils/APICalls/ProfileAPICalls";
 import { useParams } from "react-router-dom";
+import { retrieveUserProfilePosts } from "../utils/APICalls/UserProfileAPICalls";
 
 export default function UserProfile() {
   const [userProfile, setUserProfile] = useState(null);
@@ -11,17 +11,8 @@ export default function UserProfile() {
   const { userId } = useParams();
 
   useEffect(() => {
-    // retrieve user data & their posts
-    fetch(`/user/${userId}`, {
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem("jwt"),
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        setUserProfile(data);
-      });
+    // retrieve profile post from any user for their user page
+    retrieveUserProfilePosts(userId, setUserProfile);
   }, []);
 
   return (

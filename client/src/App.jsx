@@ -14,12 +14,12 @@ import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
-import Profile from "./pages/Profile";
+import Profile from "./pages/MyProfile";
 import CreatePost from "./pages/CreatePost";
+import UserProfile from "./pages/UserProfile";
 
 // custom reducer hook
 import { initialState, reducer } from "./utils/reducerCustomHook/userReducer";
-import UserProfile from "./pages/UserProfile";
 
 // create/export context
 export const UserContext = createContext();
