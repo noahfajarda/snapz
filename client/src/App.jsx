@@ -18,7 +18,7 @@ import Profile from "./pages/Profile";
 import CreatePost from "./pages/CreatePost";
 
 // custom reducer hook
-import { initialState, reducer } from "./reducer/userReducer";
+import { initialState, reducer } from "./utils/reducerCustomHook/userReducer";
 
 // create/export context
 export const UserContext = createContext();
