@@ -53,9 +53,10 @@
   right: auto !important;
 }
 
-/* likes */
+/* likes & delete */
 .unlike,
-.like {
+.like,
+.delete {
   cursor: pointer;
 }
 
@@ -77,6 +78,15 @@ h5 {
 }
 h6 {
   font-size: 0.67em;
+}
+
+button.bg-sky-300 {
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+button.bg-sky-300:hover {
+  background-color: rgb(76, 170, 191);
+  color: white;
 }
 
 /* media queries */
