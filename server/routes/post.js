@@ -130,17 +130,50 @@ router.put("/comment", requireLogin, async (req, res) => {
   }
 })
 
+// DELETE post
 router.delete("/deletepost/:postId", requireLogin, async (req, res) => {
   try {
-
+    // find the post to delete
     const postToDelete = await Post.findOne({ _id: req.params.postId })
       .populate("postedBy", "_id name")
 
+    // check if the post belongs to logged in user (post id vs. context id)
     if (postToDelete.postedBy._id.toString() === req.user._id.toString()) {
+      // delete post
       const deletedPost = await Post.findOneAndDelete({ _id: req.params.postId })
         .populate("postedBy", "_id name")
       res.json(deletedPost);
     }
+  } catch (err) {
+    console.log(err)
+    return res.status(422).json({ error: err })
+  }
+})
+
+// DELETE comment
+router.delete("/deletecomment/:postId/:commentId", requireLogin, async (req, res) => {
+  try {
+    // find the post to delete a comment from
+    const postToDeleteComment = await Post.findOne({ _id: req.params.postId })
+      .populate("postedBy", "_id name")
+
+    // filter comment from post that matches commentId
+    const comment = postToDeleteComment.comments.filter(comment =>
+      comment._id.toString() === req.params.commentId
+    )
+
+    // check if the comment's user id == the logged in user
+    if (comment[0].postedBy.toString() === req.user._id.toString()) {
+      // find the post to delete comment
+      const newPost = await Post.findOneAndUpdate({ _id: req.params.postId }, {
+        $pull: { comments: { _id: req.params.commentId } }
+      }, {
+        new: true
+      })
+        .populate("comments.postedBy", "_id name")
+        .then(data => res.json(data))
+    }
+
   } catch (err) {
     console.log(err)
     return res.status(422).json({ error: err })
