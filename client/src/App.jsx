@@ -19,6 +19,7 @@ import CreatePost from "./pages/CreatePost";
 
 // custom reducer hook
 import { initialState, reducer } from "./utils/reducerCustomHook/userReducer";
+import UserProfile from "./pages/UserProfile";
 
 // create/export context
 export const UserContext = createContext();
@@ -46,8 +47,10 @@ const Routing = () => {
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
-      <Route path="/profile" element={<Profile />} />
+      {/* match the EXACT path */}
+      <Route exact path="/profile" element={<Profile />} />
       <Route path="/create" element={<CreatePost />} />
+      <Route path="/profile/:userId" element={<UserProfile />} />
       <Route path="*" element={<Home />} />
     </Routes>
   );

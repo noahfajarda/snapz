@@ -8,6 +8,8 @@ import { deletePost } from "../utils/APICalls/HomeAPICalls";
 import CommentSection from "../components/CommentSection";
 import LikesSection from "../components/LikesSection";
 
+import { Link } from "react-router-dom";
+
 function Post({ singlePost, postsData, setPostsData }) {
   // retrieve 'logged-in user' data
   const { state, dispatch } = useContext(UserContext);
@@ -16,7 +18,15 @@ function Post({ singlePost, postsData, setPostsData }) {
   return (
     <div className="card home-card">
       <h5>
-        {singlePost.postedBy.name}
+        <Link
+          to={
+            singlePost.postedBy._id !== state._id
+              ? `/profile/${singlePost.postedBy._id}`
+              : `/profile`
+          }
+        >
+          {singlePost.postedBy.name}
+        </Link>
         {singlePost.postedBy._id === state._id && (
           <i
             className="material-icons delete"
