@@ -1,46 +1,16 @@
 import React, { useEffect, useState, useContext } from "react";
-
 // retrieve user with context
 import { UserContext } from "../App";
-
 // API CALLS
 import { retrieveAllPosts } from "../utils/APICalls/HomeAPICalls";
-import {
-  likePost,
-  unlikePost,
-  commentOnPost,
-} from "../utils/APICalls/HomeAPICalls";
+import { deletePost } from "../utils/APICalls/HomeAPICalls";
+// COMPONENTS
+import CommentSection from "../components/CommentSection";
+import LikesSection from "../components/LikesSection";
 
 function Post({ singlePost, postsData, setPostsData }) {
-  // state variables
-  const [likeCount, setLikeCount] = useState(singlePost.likes.length);
-  const [userLiked, setUserLiked] = useState(false);
-  const [comments, setComments] = useState(singlePost.comments);
-
   // retrieve 'logged-in user' data
   const { state, dispatch } = useContext(UserContext);
-
-  const deletePost = (postId) => {
-    console.log(postId);
-    fetch(`/deletepost/${postId}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem("jwt"),
-      },
-    })
-      .then((res) => res.json())
-      .then((result) => {
-        const newData = postsData.filter((item) => item._id !== result._id);
-        setPostsData(newData);
-      });
-  };
-
-  // set the post to 'liked' if user already liked the post
-  useEffect(() => {
-    // set user liked external function
-    if (singlePost.likes.includes(state._id)) setUserLiked(true);
-  }, []);
 
   // display 'singlePost' data with 'Post' component
   return (
@@ -49,9 +19,9 @@ function Post({ singlePost, postsData, setPostsData }) {
         {singlePost.postedBy.name}
         {singlePost.postedBy._id === state._id && (
           <i
-            className="material-icons"
+            className="material-icons delete"
             style={{ float: "right" }}
-            onClick={() => deletePost(singlePost._id)}
+            onClick={() => deletePost(singlePost._id, postsData, setPostsData)}
           >
             delete
           </i>
@@ -74,49 +44,12 @@ function Post({ singlePost, postsData, setPostsData }) {
           <i className="material-icons" style={{ color: "red" }}>
             favorite
           </i>
-          {/* display different icons based on if user liked post */}
-          {userLiked ? (
-            <i
-              className="material-icons unlike"
-              onClick={() =>
-                unlikePost(singlePost._id, setLikeCount, setUserLiked)
-              }
-            >
-              thumb_down
-            </i>
-          ) : (
-            <i
-              className="material-icons like"
-              onClick={() =>
-                likePost(singlePost._id, setLikeCount, setUserLiked)
-              }
-            >
-              thumb_up
-            </i>
-          )}
-          <h6>{likeCount} likes</h6>
+          {/* likes section */}
+          <LikesSection singlePost={singlePost} state={state} />
           <h6>{singlePost.title}</h6>
           <p>{singlePost.body}</p>
-
-          {/* iterate through comments to display */}
-          {comments.map((comment) => (
-            <h6 key={comment._id}>
-              <span style={{ fontWeight: "500" }}>{comment.postedBy.name}</span>{" "}
-              {comment.text}
-            </h6>
-          ))}
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              commentOnPost(e.target[0].value, singlePost._id, setComments);
-            }}
-          >
-            <input
-              type="text"
-              placeholder="add a comment"
-              id={`${singlePost._id}-comment-box`}
-            />
-          </form>
+          {/* comment section */}
+          <CommentSection singlePost={singlePost} />
         </div>
       </div>
     </div>
