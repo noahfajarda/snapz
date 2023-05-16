@@ -130,4 +130,21 @@ router.put("/comment", requireLogin, async (req, res) => {
   }
 })
 
+router.delete("/deletepost/:postId", requireLogin, async (req, res) => {
+  try {
+
+    const postToDelete = await Post.findOne({ _id: req.params.postId })
+      .populate("postedBy", "_id name")
+
+    if (postToDelete.postedBy._id.toString() === req.user._id.toString()) {
+      const deletedPost = await Post.findOneAndDelete({ _id: req.params.postId })
+        .populate("postedBy", "_id name")
+      res.json(deletedPost);
+    }
+  } catch (err) {
+    console.log(err)
+    return res.status(422).json({ error: err })
+  }
+})
+
 module.exports = router;

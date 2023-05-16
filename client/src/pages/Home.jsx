@@ -11,7 +11,7 @@ import {
   commentOnPost,
 } from "../utils/APICalls/HomeAPICalls";
 
-function Post({ singlePost }) {
+function Post({ singlePost, postsData, setPostsData }) {
   // state variables
   const [likeCount, setLikeCount] = useState(singlePost.likes.length);
   const [userLiked, setUserLiked] = useState(false);
@@ -19,6 +19,22 @@ function Post({ singlePost }) {
 
   // retrieve 'logged-in user' data
   const { state, dispatch } = useContext(UserContext);
+
+  const deletePost = (postId) => {
+    console.log(postId);
+    fetch(`/deletepost/${postId}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("jwt"),
+      },
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        const newData = postsData.filter((item) => item._id !== result._id);
+        setPostsData(newData);
+      });
+  };
 
   // set the post to 'liked' if user already liked the post
   useEffect(() => {
@@ -29,22 +45,29 @@ function Post({ singlePost }) {
   // display 'singlePost' data with 'Post' component
   return (
     <div className="card home-card">
-      <h5>{singlePost.postedBy.name}</h5>
+      <h5>
+        {singlePost.postedBy.name}
+        {singlePost.postedBy._id === state._id && (
+          <i
+            className="material-icons"
+            style={{ float: "right" }}
+            onClick={() => deletePost(singlePost._id)}
+          >
+            delete
+          </i>
+        )}
+      </h5>
       <div className="card-image">
         {/* conditional if post is an image */}
-        {singlePost.type === "Image" ? (
+        {singlePost.type === "Image" && (
           <img src={singlePost.asset} alt="background" />
-        ) : (
-          <div></div>
         )}
         {/* conditional if post is a video */}
-        {singlePost.type === "Video" ? (
+        {singlePost.type === "Video" && (
           <video width="500px" height="500px" controls="controls">
             {/* video */}
             <source src={singlePost.asset} type="video/mp4" />
           </video>
-        ) : (
-          <div></div>
         )}
         <div className="card-content">
           {/* icon from materialize */}
@@ -74,6 +97,7 @@ function Post({ singlePost }) {
           <h6>{likeCount} likes</h6>
           <h6>{singlePost.title}</h6>
           <p>{singlePost.body}</p>
+
           {/* iterate through comments to display */}
           {comments.map((comment) => (
             <h6 key={comment._id}>
@@ -101,7 +125,7 @@ function Post({ singlePost }) {
 
 export default function Home() {
   // initialize 'posts data' variable
-  const [postsdata, setPostsData] = useState([]);
+  const [postsData, setPostsData] = useState([]);
 
   // retrieve 'posts' data from DB
   useEffect(() => {
@@ -113,9 +137,13 @@ export default function Home() {
     <React.Fragment>
       <div className="home">
         {/* iterate through posts data to display */}
-        {postsdata.map((singlePost) => (
+        {postsData.map((singlePost) => (
           <div key={singlePost._id}>
-            <Post singlePost={singlePost} />
+            <Post
+              singlePost={singlePost}
+              postsData={postsData}
+              setPostsData={setPostsData}
+            />
           </div>
         ))}
       </div>

@@ -31,7 +31,7 @@ export default function Profile() {
           />
         </div>
         <div>
-          <h4>{state ? state.name : "loading"}</h4>
+          <h4>{state && state.name}</h4>
           <div
             style={{
               display: "flex",
