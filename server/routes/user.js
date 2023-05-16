@@ -10,7 +10,8 @@ const User = mongoose.model("User")
 const requireLogin = require("../middleware/requireLogin")
 
 
-router.get("/user/:id", async (req, res) => {
+// retrieve USER & POSTS data from logged in user
+router.get("/user/:id", requireLogin, async (req, res) => {
   try {
     // find user info associated with 'id'
     const oneUser = await User.findOne({ _id: req.params.id }).select("-password")
