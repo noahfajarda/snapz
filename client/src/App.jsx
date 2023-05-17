@@ -17,6 +17,7 @@ import Signup from "./pages/Signup";
 import Profile from "./pages/MyProfile";
 import CreatePost from "./pages/CreatePost";
 import UserProfile from "./pages/UserProfile";
+import FollowedUserPosts from "./pages/FollowedUserPosts";
 
 // custom reducer hook
 import { initialState, reducer } from "./utils/reducerCustomHook/userReducer";
@@ -51,6 +52,7 @@ const Routing = () => {
       <Route exact path="/profile" element={<Profile />} />
       <Route path="/create" element={<CreatePost />} />
       <Route path="/profile/:userId" element={<UserProfile />} />
+      <Route path="/followerfeed" element={<FollowedUserPosts />} />
       <Route path="*" element={<Home />} />
     </Routes>
   );

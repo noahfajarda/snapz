@@ -28,6 +28,22 @@ router.get("/allposts", requireLogin, async (req, res) => {
   }
 })
 
+// READ/GET followed user posts
+router.get("/followedposts", requireLogin, async (req, res) => {
+  try {
+    const posts = await Post.find({ postedBy: { $in: req.user.following } }).populate("postedBy", "_id name").populate({
+      path: 'comments',
+      populate: {
+        path: 'postedBy',
+        model: 'User'
+      }
+    })
+    res.json({ posts })
+  } catch (err) {
+    console.error(err)
+  }
+})
+
 // READ/GET all posts by USER (protected route)
 router.get("/myposts", requireLogin, async (req, res) => {
   // will use the jwt to get the user's info

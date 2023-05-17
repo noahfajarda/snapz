@@ -82,8 +82,8 @@ router.post("/login", async (req, res) => {
       // create a JWT for login & send if successful
       const token = jwt.sign({ _id: savedUser._id }, JWT_SECRET)
       // extract id, name, & email from 'savedUser' to pass through
-      const { _id, name, email } = savedUser;
-      return res.json({ token, user: { _id, name, email } })
+      const { _id, name, email, followers, following } = savedUser;
+      return res.json({ token, user: { _id, name, email, followers, following } })
     }
     return res.status(422).json({ error: "Invalid Email or Password" })
   } catch (err) {
