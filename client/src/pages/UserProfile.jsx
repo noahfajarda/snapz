@@ -5,6 +5,7 @@ import { retrieveUserProfilePosts } from "../utils/APICalls/UserProfileAPICalls"
 
 export default function UserProfile() {
   const [userProfile, setUserProfile] = useState(null);
+  const [showFollow, setShowFollow] = useState(false);
   // retrieve user data from context
   const { state, dispatch } = useContext(UserContext);
   // retrieve userId from URL param
@@ -14,6 +15,77 @@ export default function UserProfile() {
     // retrieve profile post from any user for their user page
     retrieveUserProfilePosts(userId, setUserProfile);
   }, []);
+
+  const followUser = async () => {
+    const followResponse = await fetch("/follow", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("jwt"),
+      },
+      body: JSON.stringify({
+        followId: userId,
+      }),
+    });
+
+    let followData = await followResponse.json();
+    followData = followData.addFollowingToCurrentUser;
+    dispatch({
+      type: "UPDATE",
+      payload: {
+        following: followData.following,
+        followers: followData.followers,
+      },
+    });
+    localStorage.setItem("user", JSON.stringify(followData));
+    setUserProfile((prev) => {
+      return {
+        ...prev,
+        oneUser: {
+          ...prev.oneUser,
+          followers: [...prev.oneUser.followers, followData._id],
+        },
+      };
+    });
+    setShowFollow(true);
+  };
+
+  const unfollowUser = async () => {
+    const unfollowResponse = await fetch("/unfollow", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("jwt"),
+      },
+      body: JSON.stringify({
+        unfollowId: userId,
+      }),
+    });
+
+    let followData = await unfollowResponse.json();
+    followData = followData.removeFollowingFromCurrentUser;
+    dispatch({
+      type: "UPDATE",
+      payload: {
+        following: followData.following,
+        followers: followData.followers,
+      },
+    });
+    localStorage.setItem("user", JSON.stringify(followData));
+    setUserProfile((prev) => {
+      const newFollower = prev.oneUser.followers.filter(
+        (item) => item !== followData._id
+      );
+      return {
+        ...prev,
+        oneUser: {
+          ...prev.oneUser,
+          followers: newFollower,
+        },
+      };
+    });
+    setShowFollow(false);
+  };
 
   return (
     <>
@@ -40,8 +112,8 @@ export default function UserProfile() {
               />
             </div>
             <div>
-              <h4>{userProfile && userProfile.oneUser.name}</h4>
-              <h4>{userProfile && userProfile.oneUser.email}</h4>
+              <h4>{userProfile.oneUser.name}</h4>
+              <h4>{userProfile.oneUser.email}</h4>
               <div
                 style={{
                   display: "flex",
@@ -49,9 +121,38 @@ export default function UserProfile() {
                   width: "108%",
                 }}
               >
-                <h6>{userProfile && userProfile.userPosts.length} posts</h6>
-                <h6>40 followers</h6>
+                {userProfile.userPosts.length === 1 ? (
+                  <h6>{userProfile.userPosts.length} post</h6>
+                ) : (
+                  <h6>{userProfile.userPosts.length} posts</h6>
+                )}
+                {userProfile.oneUser.followers.length === 1 ? (
+                  <h6>{userProfile.oneUser.followers.length} follower</h6>
+                ) : (
+                  <h6>{userProfile.oneUser.followers.length} followers</h6>
+                )}
                 <h6>40 following</h6>
+                {showFollow ? (
+                  <button
+                    className="btn waves-effect waves-light #448aff blue darken-1"
+                    type="submit"
+                    name="action"
+                    onClick={() => unfollowUser()}
+                  >
+                    {/* unfollow button */}
+                    Unfollow User
+                  </button>
+                ) : (
+                  <button
+                    className="btn waves-effect waves-light #448aff blue darken-1"
+                    type="submit"
+                    name="action"
+                    onClick={() => followUser()}
+                  >
+                    {/* follow button */}
+                    Follow User
+                  </button>
+                )}
               </div>
             </div>
           </div>
