@@ -26,12 +26,12 @@ router.get("/user/:id", requireLogin, async (req, res) => {
 })
 
 // ADD followers to user
-router.put("follow", requireLogin, async (req, res) => {
+router.put("/follow", requireLogin, async (req, res) => {
   try {
     // add logged in user to 'followers'
     await User.findByIdAndUpdate(req.body.followId, {
       $push: { followers: req.user._id }
-    }, { new: true })
+    }, { new: true }).select("-password")
 
     // add followed user to 'following'
     const addFollowingToCurrentUser = await User.findByIdAndUpdate(req.user._id, {
@@ -47,20 +47,20 @@ router.put("follow", requireLogin, async (req, res) => {
 })
 
 // REMOVE followers from user
-router.put("unfollow", requireLogin, async (req, res) => {
+router.put("/unfollow", requireLogin, async (req, res) => {
   try {
     // remove logged in user from 'followers'
     await User.findByIdAndUpdate(req.body.unfollowId, {
       $pull: { followers: req.user._id }
-    }, { new: true })
+    }, { new: true }).select("-password")
 
     // remove followed user from 'following'
     const removeFollowingFromCurrentUser = await User.findByIdAndUpdate(req.user._id, {
-      $pull: { following: req.body.followId }
+      $pull: { following: req.body.unfollowId }
     }, { new: true })
 
     // return 'unfollowing' data
-    res.json({ addFollowingToCurrentUser })
+    res.json({ removeFollowingFromCurrentUser })
 
   } catch (err) {
     console.log(err)
