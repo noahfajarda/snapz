@@ -13,7 +13,7 @@ router.get("/allposts", requireLogin, async (req, res) => {
   try {
     // populated 'postedBy' field based on foreign key
     // second param == fields to include
-    const posts = await Post.find().populate("postedBy", "_id name").populate({
+    const posts = await Post.find().populate("postedBy", "_id name profilePicURL").populate({
       path: 'comments',
       populate: {
         // populate each 'User' for comments

@@ -47,7 +47,11 @@ export default function UserProfile() {
                   height: "160px",
                   borderRadius: "80px",
                 }}
-                src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8MXw3NjA4Mjc3NHx8ZW58MHx8fHw%3D&w=1000&q=80"
+                src={
+                  userProfile && userProfile.oneUser.profilePicURL
+                    ? userProfile.oneUser.profilePicURL
+                    : "https://www.seiu1000.org/sites/main/files/main-images/camera_lense_0.jpeg"
+                }
                 alt=""
               />
             </div>

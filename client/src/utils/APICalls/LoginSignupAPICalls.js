@@ -53,12 +53,12 @@ export const attemptSignup = async (state, navigate) => {
       },
       body: JSON.stringify({
         name: state.name,
-        password: state.password,
         email: state.email,
+        password: state.password,
+        profilePicURL: state.profilePicURL,
       }),
     });
     const signupResponse = await signupData.json();
-
     // handle error
     if (signupResponse.error) {
       // show pop-up

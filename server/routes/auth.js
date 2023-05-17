@@ -31,7 +31,7 @@ router.get('/about', (req, res) => {
 // signup route
 router.post("/signup", async (req, res) => {
   // destructure req.body properties
-  const { name, email, password } = req.body
+  const { name, email, password, profilePicURL } = req.body
 
   // check for valid fields
   if (!name || !email || !password) {
@@ -49,7 +49,7 @@ router.post("/signup", async (req, res) => {
 
     // insert user into DB w/ hashed password & save
     const newUser = new User({
-      email, password: hashedpassword, name
+      email, password: hashedpassword, name, profilePicURL
     })
     await newUser.save()
     res.json({ message: "Saved Successfully" })
@@ -82,8 +82,8 @@ router.post("/login", async (req, res) => {
       // create a JWT for login & send if successful
       const token = jwt.sign({ _id: savedUser._id }, JWT_SECRET)
       // extract id, name, & email from 'savedUser' to pass through
-      const { _id, name, email, followers, following } = savedUser;
-      return res.json({ token, user: { _id, name, email, followers, following } })
+      const { _id, name, email, followers, following, profilePicURL } = savedUser;
+      return res.json({ token, user: { _id, name, email, followers, following, profilePicURL } })
     }
     return res.status(422).json({ error: "Invalid Email or Password" })
   } catch (err) {
