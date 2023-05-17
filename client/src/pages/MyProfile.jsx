@@ -32,6 +32,7 @@ export default function MyProfile() {
         </div>
         <div>
           <h4>{state && state.name}</h4>
+          <h4>{state && state.email}</h4>
           <div
             style={{
               display: "flex",
@@ -40,8 +41,8 @@ export default function MyProfile() {
             }}
           >
             <h6>{myPosts.length} posts</h6>
-            <h6>40 followers</h6>
-            <h6>40 following</h6>
+            <h6>{state && state.followers.length} followers</h6>
+            <h6>{state && state.following.length} following</h6>
           </div>
         </div>
       </div>

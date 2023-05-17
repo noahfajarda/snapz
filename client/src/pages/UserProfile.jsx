@@ -1,7 +1,11 @@
 import React, { useEffect, useState, useContext } from "react";
 import { UserContext } from "../App";
 import { useParams } from "react-router-dom";
-import { retrieveUserProfilePosts } from "../utils/APICalls/UserProfileAPICalls";
+import {
+  retrieveUserProfilePosts,
+  followUser,
+  unfollowUser,
+} from "../utils/APICalls/UserProfileAPICalls";
 
 export default function UserProfile() {
   const [userProfile, setUserProfile] = useState(null);
@@ -16,76 +20,12 @@ export default function UserProfile() {
     retrieveUserProfilePosts(userId, setUserProfile);
   }, []);
 
-  const followUser = async () => {
-    const followResponse = await fetch("/follow", {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem("jwt"),
-      },
-      body: JSON.stringify({
-        followId: userId,
-      }),
-    });
-
-    let followData = await followResponse.json();
-    followData = followData.addFollowingToCurrentUser;
-    dispatch({
-      type: "UPDATE",
-      payload: {
-        following: followData.following,
-        followers: followData.followers,
-      },
-    });
-    localStorage.setItem("user", JSON.stringify(followData));
-    setUserProfile((prev) => {
-      return {
-        ...prev,
-        oneUser: {
-          ...prev.oneUser,
-          followers: [...prev.oneUser.followers, followData._id],
-        },
-      };
-    });
-    setShowFollow(true);
-  };
-
-  const unfollowUser = async () => {
-    const unfollowResponse = await fetch("/unfollow", {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem("jwt"),
-      },
-      body: JSON.stringify({
-        unfollowId: userId,
-      }),
-    });
-
-    let followData = await unfollowResponse.json();
-    followData = followData.removeFollowingFromCurrentUser;
-    dispatch({
-      type: "UPDATE",
-      payload: {
-        following: followData.following,
-        followers: followData.followers,
-      },
-    });
-    localStorage.setItem("user", JSON.stringify(followData));
-    setUserProfile((prev) => {
-      const newFollower = prev.oneUser.followers.filter(
-        (item) => item !== followData._id
-      );
-      return {
-        ...prev,
-        oneUser: {
-          ...prev.oneUser,
-          followers: newFollower,
-        },
-      };
-    });
-    setShowFollow(false);
-  };
+  // see if user is already following
+  useEffect(() => {
+    if (userProfile && userProfile.oneUser.followers.includes(state._id)) {
+      setShowFollow(true);
+    }
+  }, [userProfile]);
 
   return (
     <>
@@ -131,13 +71,20 @@ export default function UserProfile() {
                 ) : (
                   <h6>{userProfile.oneUser.followers.length} followers</h6>
                 )}
-                <h6>40 following</h6>
+                <h6>{userProfile.oneUser.following.length} following</h6>
                 {showFollow ? (
                   <button
                     className="btn waves-effect waves-light #448aff blue darken-1"
                     type="submit"
                     name="action"
-                    onClick={() => unfollowUser()}
+                    onClick={() =>
+                      unfollowUser(
+                        userId,
+                        dispatch,
+                        setUserProfile,
+                        setShowFollow
+                      )
+                    }
                   >
                     {/* unfollow button */}
                     Unfollow User
@@ -147,7 +94,14 @@ export default function UserProfile() {
                     className="btn waves-effect waves-light #448aff blue darken-1"
                     type="submit"
                     name="action"
-                    onClick={() => followUser()}
+                    onClick={() =>
+                      followUser(
+                        userId,
+                        dispatch,
+                        setUserProfile,
+                        setShowFollow
+                      )
+                    }
                   >
                     {/* follow button */}
                     Follow User
