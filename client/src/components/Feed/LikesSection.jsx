@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { likePost, unlikePost } from "../utils/APICalls/HomeAPICalls";
+import { likePost, unlikePost } from "../../utils/APICalls/HomeAPICalls";
 
 export default function LikesSection({ singlePost, state }) {
   const [likeCount, setLikeCount] = useState(singlePost.likes.length);

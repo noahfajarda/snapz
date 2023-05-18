@@ -1,6 +1,9 @@
 import React, { useContext, useState } from "react";
-import { commentOnPost, deleteComment } from "../utils/APICalls/HomeAPICalls";
-import { UserContext } from "../App";
+import {
+  commentOnPost,
+  deleteComment,
+} from "../../utils/APICalls/HomeAPICalls";
+import { UserContext } from "../../App";
 
 export default function CommentSection({ singlePost }) {
   const [comments, setComments] = useState(singlePost.comments);
