@@ -60,6 +60,19 @@ export default function MyProfile() {
             JSON.stringify({ ...state, profilePicURL: assetData.url })
           );
 
+          fetch("updatepic", {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + localStorage.getItem("jwt"),
+            },
+            body: JSON.stringify({
+              profilePicURL: assetData.url,
+            }),
+          })
+            .then((res) => res.json())
+            .then((data) => console.log(data));
+
           // also update context state variable
           dispatch({ type: "UPDATEPROFILEPIC", payload: assetData.url });
         } catch (err) {
