@@ -60,7 +60,7 @@ export default function Signup() {
   };
 
   return (
-    <div className="my-card">
+    <div className="mt-8">
       <div className="card auth-card input-field">
         <h2 className="brand-logo sign-up">Instagram</h2>
         <form onSubmit={handleSignup}>

@@ -16,14 +16,14 @@ export default function LikesSection({ singlePost, state }) {
       {/* display different icons based on if user liked post */}
       {userLiked ? (
         <i
-          className="material-icons unlike"
+          className="material-icons cursor-pointer"
           onClick={() => unlikePost(singlePost._id, setLikeCount, setUserLiked)}
         >
           thumb_down
         </i>
       ) : (
         <i
-          className="material-icons like"
+          className="material-icons cursor-pointer"
           onClick={() => likePost(singlePost._id, setLikeCount, setUserLiked)}
         >
           thumb_up

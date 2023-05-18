@@ -37,7 +37,7 @@ export default function Post({ singlePost, postsData, setPostsData }) {
         </Link>
         {singlePost.postedBy._id === state._id && (
           <i
-            className="material-icons delete"
+            className="material-icons cursor-pointer"
             style={{ float: "right" }}
             onClick={() => deletePost(singlePost._id, postsData, setPostsData)}
           >

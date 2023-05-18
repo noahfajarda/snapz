@@ -16,10 +16,6 @@
   margin: 10px auto;
 }
 
-.my-card {
-  margin-top: 30px;
-}
-
 /* outline for focused input field */
 .input-field input[type="text"]:focus,
 .input-field input[type="password"]:focus {
@@ -57,13 +53,6 @@
   top: 30px !important;
   left: 20px !important;
   right: auto !important;
-}
-
-/* likes & delete */
-.unlike,
-.like,
-.delete {
-  cursor: pointer;
 }
 
 /* hover transition for button */
