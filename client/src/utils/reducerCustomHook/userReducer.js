@@ -11,6 +11,11 @@ export const reducer = (state, action) => {
       followers: action.payload.followers,
       following: action.payload.following,
     }
+  } else if (action.type === "UPDATEPROFILEPIC") {
+    return {
+      ...state,
+      profilePicURL: action.payload
+    }
   }
   return state;
 }
