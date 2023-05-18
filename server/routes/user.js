@@ -70,7 +70,6 @@ router.put("/unfollow", requireLogin, async (req, res) => {
 
 router.put("/updatepic", requireLogin, async (req, res) => {
   try {
-    console.log(req.body.profilePicURL)
     const updatePic = await User.findByIdAndUpdate(req.user._id, {
       $set: { profilePicURL: req.body.profilePicURL },
     }, { new: true })
