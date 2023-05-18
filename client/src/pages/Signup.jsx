@@ -5,8 +5,10 @@ import validateEmail from "../utils/validateEmail";
 
 // import materialize to handle error
 import M from "materialize-css";
-import { attemptSignup } from "../utils/APICalls/LoginSignupAPICalls";
-const { REACT_APP_UPLOAD_PRESET, REACT_APP_CLOUD_NAME } = process.env;
+import {
+  attemptSignup,
+  postProfilePic,
+} from "../utils/APICalls/LoginSignupAPICalls";
 
 export default function Signup() {
   const navigate = useNavigate();
@@ -26,43 +28,9 @@ export default function Signup() {
   );
 
   useEffect(() => {
+    // once profile pic is set, try to sign up
     if (state.profilePicURL) attemptSignup(state, navigate);
   }, [state.profilePicURL]);
-
-  const postProfilePic = async (pic) => {
-    const data = new FormData();
-    data.append("file", pic);
-    data.append("upload_preset", REACT_APP_UPLOAD_PRESET);
-    data.append("cloud_name", REACT_APP_CLOUD_NAME);
-    // specify folder
-    data.append("folder", "Instagram-Clone/profile-Pics");
-
-    // API ROUTE = https://api.cloudinary.com/v1_1/${REACT_APP_CLOUD_NAME}/image/upload
-    // .../video/... == mp4 ONLY
-    try {
-      const response = await fetch(
-        `https://api.cloudinary.com/v1_1/${REACT_APP_CLOUD_NAME}/image/upload`,
-        {
-          method: "POST",
-          body: data,
-        }
-      );
-      // asset POST response data & return the asset URL alone
-      const assetData = await response.json();
-
-      // handle error
-      if (assetData?.error?.message) {
-        // show pop-up
-        M.toast({
-          html: assetData.error.message,
-          classes: "#c62828 red darken-3",
-        });
-      }
-      return assetData.url;
-    } catch (err) {
-      console.error(err);
-    }
-  };
 
   const handleSignup = async (e) => {
     e.preventDefault();
@@ -71,23 +39,24 @@ export default function Signup() {
     // check email is right type
     if (!validateEmail(state.email)) return;
 
-    // check if profile pic is valid pic
-    if (state.image) {
-      if (!validPicTypes.includes(state.image.type)) {
-        M.toast({
-          html: "Invalid File Type!",
-          classes: "#c62828 red darken-3",
-        });
-        return;
-      }
-
-      // post profile pic & add URL to state
-      const profilePicURL = await postProfilePic(state.image);
-      dispatch({ profilePicURL });
-    } else {
-      // function to attempt signup
+    // if there's no image, attempt to signup with function
+    if (!state.image) {
       attemptSignup(state, navigate);
+      return;
     }
+
+    // check if profile pic is valid pic
+    if (!validPicTypes.includes(state.image.type)) {
+      M.toast({
+        html: "Invalid File Type!",
+        classes: "#c62828 red darken-3",
+      });
+      return;
+    }
+
+    // post profile pic & add URL to state
+    const profilePicURL = await postProfilePic(state.image);
+    dispatch({ profilePicURL });
   };
 
   return (
