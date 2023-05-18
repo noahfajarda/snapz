@@ -27,10 +27,16 @@
   box-shadow: 0 1px 0 0 #3f02f7;
 }
 
-/* photos in profile */
+/* photos & videos in profile */
 .photo-item {
   height: 30%;
   width: 300px;
+  margin: 20px;
+}
+
+.video-item {
+  height: 150px;
+  width: 150px;
   margin: 20px;
 }
 

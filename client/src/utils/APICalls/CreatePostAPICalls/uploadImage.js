@@ -14,8 +14,8 @@ export async function postDetails(asset, type) {
   // specify folder
   data.append("folder", "Instagram-Clone");
 
-  // API ROUTE = https://api.cloudinary.com/v1_1/${REACT_APP_CLOUD_NAME}/image/upload
-  // .../video/... == mp4 ONLY
+  // API ROUTE = https://api.cloudinary.com/v1_1/${REACT_APP_CLOUD_NAME}/${image or video}/upload
+  // .../video/... == mp4, webm, & mov ONLY
   try {
     const response = await fetch(`https://api.cloudinary.com/v1_1/${REACT_APP_CLOUD_NAME}/${type.toLowerCase()}/upload`, {
       method: "POST",
@@ -24,9 +24,8 @@ export async function postDetails(asset, type) {
     // asset POST response data & return the asset URL alone
     const assetData = await response.json();
 
-    // handle error
+    // handle error by showing pop-up
     if (assetData?.error?.message) {
-      // show pop-up
       M.toast({
         html: assetData.error.message,
         classes: "#c62828 red darken-3",
@@ -48,7 +47,7 @@ export async function createPost(state, navigate) {
         Authorization: "Bearer " + localStorage.getItem("jwt"),
       },
       body: JSON.stringify({
-        // attatch title, body, & imageUul
+        // attatch title, body, assetUrl, & type
         title: state.title,
         body: state.body,
         assetUrl: state.assetUrl,
@@ -58,22 +57,21 @@ export async function createPost(state, navigate) {
     // retrieve posted data
     const data = await response.json();
 
-    // handle error
-    if (data.error) {
-      // show pop-up
-      M.toast({
-        html: data.error,
-        classes: "#c62828 red darken-3",
-      });
-    } else {
-      // show pop-up
+
+    // show a successful popup & return to homepage
+    if (!data.error) {
       M.toast({
         html: "Created Post Successfully",
         classes: "#43a047 green darken-1",
       });
-      // navigate to home screen
-      navigate("/");
+      return navigate("/");
     }
+    // show error pop-up otherwise
+    M.toast({
+      html: data.error,
+      classes: "#c62828 red darken-3",
+    });
+
   } catch (err) {
     console.error(err);
   }

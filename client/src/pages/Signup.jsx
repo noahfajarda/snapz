@@ -68,14 +68,9 @@ export default function Signup() {
     e.preventDefault();
     const validPicTypes = ["image/png", "image/jpeg", "image/jpg"];
 
-    // check if email is valid in format
-    if (!validateEmail(state.email)) {
-      M.toast({
-        html: "Invalid Email!",
-        classes: "#c62828 red darken-3",
-      });
-      return;
-    }
+    // check email is right type
+    if (!validateEmail(state.email)) return;
+
     // check if profile pic is valid pic
     if (state.image) {
       if (!validPicTypes.includes(state.image.type)) {

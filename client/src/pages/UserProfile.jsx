@@ -6,6 +6,7 @@ import {
   followUser,
   unfollowUser,
 } from "../utils/APICalls/UserProfileAPICalls";
+import UserPosts from "../components/ProfilePages/UserPosts";
 
 export default function UserProfile() {
   const [userProfile, setUserProfile] = useState(null);
@@ -30,23 +31,11 @@ export default function UserProfile() {
   return (
     <>
       {userProfile ? (
-        <div style={{ maxWidth: "1080px", margin: "0px auto" }}>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-around",
-              margin: "18px 0px",
-              borderBottom: "1px solid gray",
-              padding: "20px",
-            }}
-          >
+        <div className="max-w-5xl mx-auto my-0">
+          <div className="flex justify-around mx-0 my-5 border-b-2 border-b-gray-300 p-5">
             <div>
               <img
-                style={{
-                  width: "160px",
-                  height: "160px",
-                  borderRadius: "80px",
-                }}
+                className="w-40 h-40 rounded-full"
                 src={
                   userProfile && userProfile.oneUser.profilePicURL
                     ? userProfile.oneUser.profilePicURL
@@ -76,7 +65,10 @@ export default function UserProfile() {
                   <h6>{userProfile.oneUser.followers.length} followers</h6>
                 )}
                 <h6>{userProfile.oneUser.following.length} following</h6>
+
+                {/* follow/unfollow button */}
                 {showFollow ? (
+                  // follow button
                   <button
                     className="btn waves-effect waves-light #448aff blue darken-1"
                     type="submit"
@@ -115,17 +107,7 @@ export default function UserProfile() {
             </div>
           </div>
 
-          <div className="gallery">
-            {/* iterate through posts data */}
-            {userProfile.userPosts.map((item, idx) => (
-              <img
-                key={idx}
-                className="photo-item"
-                alt="might be a video"
-                src={item.asset}
-              />
-            ))}
-          </div>
+          <UserPosts posts={userProfile.userPosts} />
         </div>
       ) : (
         <h2>Loading... </h2>
