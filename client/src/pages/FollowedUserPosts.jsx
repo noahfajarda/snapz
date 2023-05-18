@@ -25,6 +25,15 @@ function Post({ singlePost, postsData, setPostsData }) {
               : `/profile`
           }
         >
+          <img
+            style={{ width: "160px", height: "160px", borderRadius: "80px" }}
+            src={
+              singlePost.postedBy.profilePicURL
+                ? singlePost.postedBy.profilePicURL
+                : "https://www.seiu1000.org/sites/main/files/main-images/camera_lense_0.jpeg"
+            }
+            alt=""
+          />
           {singlePost.postedBy.name}
         </Link>
         {singlePost.postedBy._id === state._id && (
