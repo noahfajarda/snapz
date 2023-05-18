@@ -29,6 +29,10 @@ export default function Navbar() {
     },
     {
       loggedIn: true,
+      page: "followerfeed",
+    },
+    {
+      loggedIn: true,
       page: "create",
     },
     {

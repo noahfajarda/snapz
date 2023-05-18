@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 // retrieve user with context
 import { UserContext } from "../App";
 // API CALLS
-import { retrieveAllPosts } from "../utils/APICalls/HomeAPICalls";
+import { retrieveAllFollowedPosts } from "../utils/APICalls/FollowedUserPostAPICalls";
 import { deletePost } from "../utils/APICalls/HomeAPICalls";
 // COMPONENTS
 import CommentSection from "../components/CommentSection";
@@ -82,7 +82,7 @@ export default function Home() {
   // retrieve 'posts' data from DB
   useEffect(() => {
     // set 'postsdata' to all posts
-    retrieveAllPosts(setPostsData);
+    retrieveAllFollowedPosts(setPostsData);
   }, []);
 
   return (

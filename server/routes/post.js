@@ -13,7 +13,7 @@ router.get("/allposts", requireLogin, async (req, res) => {
   try {
     // populated 'postedBy' field based on foreign key
     // second param == fields to include
-    const posts = await Post.find().populate("postedBy", "_id name").populate({
+    const posts = await Post.find().populate("postedBy", "_id name profilePicURL").populate({
       path: 'comments',
       populate: {
         // populate each 'User' for comments
@@ -22,6 +22,22 @@ router.get("/allposts", requireLogin, async (req, res) => {
       }
     })
 
+    res.json({ posts })
+  } catch (err) {
+    console.error(err)
+  }
+})
+
+// READ/GET followed user posts
+router.get("/followedposts", requireLogin, async (req, res) => {
+  try {
+    const posts = await Post.find({ postedBy: { $in: req.user.following } }).populate("postedBy", "_id name profilePicURL").populate({
+      path: 'comments',
+      populate: {
+        path: 'postedBy',
+        model: 'User'
+      }
+    })
     res.json({ posts })
   } catch (err) {
     console.error(err)

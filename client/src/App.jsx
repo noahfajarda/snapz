@@ -14,11 +14,13 @@ import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
-import Profile from "./pages/Profile";
+import Profile from "./pages/MyProfile";
 import CreatePost from "./pages/CreatePost";
+import UserProfile from "./pages/UserProfile";
+import FollowedUserPosts from "./pages/FollowedUserPosts";
 
 // custom reducer hook
-import { initialState, reducer } from "./reducer/userReducer";
+import { initialState, reducer } from "./utils/reducerCustomHook/userReducer";
 
 // create/export context
 export const UserContext = createContext();
@@ -46,8 +48,11 @@ const Routing = () => {
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
-      <Route path="/profile" element={<Profile />} />
+      {/* match the EXACT path */}
+      <Route exact path="/profile" element={<Profile />} />
       <Route path="/create" element={<CreatePost />} />
+      <Route path="/profile/:userId" element={<UserProfile />} />
+      <Route path="/followerfeed" element={<FollowedUserPosts />} />
       <Route path="*" element={<Home />} />
     </Routes>
   );

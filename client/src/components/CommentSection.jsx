@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { commentOnPost, deleteComment } from "../utils/APICalls/HomeAPICalls";
+import { UserContext } from "../App";
 
 export default function CommentSection({ singlePost }) {
   const [comments, setComments] = useState(singlePost.comments);
+  const { state, dispatch } = useContext(UserContext);
 
   return (
     <>
@@ -11,13 +13,15 @@ export default function CommentSection({ singlePost }) {
         <h6 key={comment._id}>
           <span style={{ fontWeight: "500" }}>{comment.postedBy.name}</span>{" "}
           {comment.text}
-          <p
-            onClick={() =>
-              deleteComment(singlePost._id, comment._id, setComments)
-            }
-          >
-            DELETE
-          </p>
+          {comment.postedBy._id === state._id && (
+            <p
+              onClick={() =>
+                deleteComment(singlePost._id, comment._id, setComments)
+              }
+            >
+              DELETE
+            </p>
+          )}
         </h6>
       ))}
       {/* form to submit individual comment */}
