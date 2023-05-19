@@ -9,25 +9,6 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const { JWT_SECRET } = require("../keys")
 
-// different types of responses:
-// res.send(), res.json()
-
-// middlewares
-// will check if the JWT is valid/exists as a header
-const requireLogin = require("../middleware/requireLogin")
-
-// routes with middlewares
-router.get('/', (req, res) => {
-  console.log('HOME ROUTE')
-  res.send("hello world")
-})
-
-// routes w/o middlewares
-router.get('/about', (req, res) => {
-  console.log('ABOUT ROUTE')
-  res.send("about page")
-})
-
 // signup route
 router.post("/signup", async (req, res) => {
   // destructure req.body properties
@@ -89,12 +70,6 @@ router.post("/login", async (req, res) => {
   } catch (err) {
     console.log(err)
   }
-})
-
-// protected routes (w/ middlewares)
-// will only run if it JWT is valid and User data is retrieved
-router.get('/protected', requireLogin, (req, res) => {
-  res.send("hello user")
 })
 
 module.exports = router
