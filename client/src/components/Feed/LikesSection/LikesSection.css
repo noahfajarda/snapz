@@ -1,0 +1,23 @@
+:root {
+  --button-dimensions: 120px;
+}
+
+/* likes */
+.like-count {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  bottom: 86px;
+  font-size: 20px;
+}
+
+/* button */
+.btn-floating {
+  width: var(--button-dimensions);
+  height: var(--button-dimensions);
+}
+
+.btn-floating i {
+  font-size: 5.7rem;
+  line-height: 130px;
+}

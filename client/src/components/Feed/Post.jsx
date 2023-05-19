@@ -5,7 +5,9 @@ import { UserContext } from "../../App";
 import { deletePost } from "../../utils/APICalls/HomeAPICalls";
 // COMPONENTS
 import CommentSection from "./CommentSection";
-import LikesSection from "./LikesSection";
+import LikesSection from "./LikesSection/LikesSection";
+// css
+import "./Post.css";
 
 import { Link } from "react-router-dom";
 
@@ -16,59 +18,72 @@ export default function Post({ singlePost, postsData, setPostsData }) {
 
   return (
     <div className="card home-card">
-      <h5>
-        <Link
-          to={
-            singlePost.postedBy._id !== state._id
-              ? `/profile/${singlePost.postedBy._id}`
-              : `/profile`
-          }
-        >
-          <img
-            style={{ width: "160px", height: "160px", borderRadius: "80px" }}
-            src={
-              singlePost.postedBy.profilePicURL
-                ? singlePost.postedBy.profilePicURL
-                : "https://www.seiu1000.org/sites/main/files/main-images/camera_lense_0.jpeg"
+      <div class="card-header">
+        <div>
+          <Link
+            to={
+              singlePost.postedBy._id !== state._id
+                ? `/profile/${singlePost.postedBy._id}`
+                : `/profile`
             }
-            alt=""
-          />
-          {singlePost.postedBy.name}
-        </Link>
+            class="flex"
+          >
+            <img
+              class="profile-image"
+              src={
+                singlePost.postedBy.profilePicURL
+                  ? singlePost.postedBy.profilePicURL
+                  : "https://www.seiu1000.org/sites/main/files/main-images/camera_lense_0.jpeg"
+              }
+              alt=""
+            />
+            <h1 class="profile-name">{singlePost.postedBy.name}</h1>
+          </Link>
+        </div>
+
         {singlePost.postedBy._id === state._id && (
           <i
-            className="material-icons cursor-pointer"
+            className="material-icons medium cursor-pointer"
             style={{ float: "right" }}
             onClick={() => deletePost(singlePost._id, postsData, setPostsData)}
           >
             delete
           </i>
         )}
-      </h5>
+      </div>
       <div className="card-image">
         {/* conditional if post is an image */}
         {singlePost.type === "Image" && (
-          <img src={singlePost.asset} alt="background" />
+          <img className="post-image" src={singlePost.asset} alt="background" />
         )}
         {/* conditional if post is a video */}
         {singlePost.type === "Video" && (
-          <video width="500px" height="500px" controls="controls">
+          <video
+            className="post-image"
+            width="500px"
+            height="500px"
+            controls="controls"
+          >
             {/* video */}
             <source src={singlePost.asset} type="video/mp4" />
           </video>
         )}
-        <div className="card-content">
-          {/* icon from materialize */}
-          <i className="material-icons" style={{ color: "red" }}>
-            favorite
-          </i>
-          {/* likes section */}
-          <LikesSection singlePost={singlePost} state={state} />
-          <h6>{singlePost.title}</h6>
-          <p>{singlePost.body}</p>
-          {/* comment section */}
-          <CommentSection singlePost={singlePost} />
-        </div>
+
+        <span className="card-title">{singlePost.title}</span>
+        {/* LIKE BUTTON */}
+        {/* likes section */}
+        <LikesSection singlePost={singlePost} state={state} />
+      </div>
+
+      {/* POSTED BY AND COMMENT SECTION */}
+      <div className="card-content">
+        <p className="posted-by-section">
+          <strong className="posted-by">{singlePost.postedBy.name}</strong>{" "}
+          {singlePost.body}
+        </p>
+
+        {/* comment section */}
+        <CommentSection singlePost={singlePost} />
       </div>
     </div>
   );

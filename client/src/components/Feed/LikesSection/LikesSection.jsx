@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { likePost, unlikePost } from "../../utils/APICalls/HomeAPICalls";
+import { likePost, unlikePost } from "../../../utils/APICalls/HomeAPICalls";
+import "./LikesSection.css";
 
 export default function LikesSection({ singlePost, state }) {
   const [likeCount, setLikeCount] = useState(singlePost.likes.length);
@@ -15,21 +16,26 @@ export default function LikesSection({ singlePost, state }) {
     <>
       {/* display different icons based on if user liked post */}
       {userLiked ? (
-        <i
-          className="material-icons cursor-pointer"
+        <div
+          className="btn-floating halfway-fab waves-effect waves-light red"
           onClick={() => unlikePost(singlePost._id, setLikeCount, setUserLiked)}
         >
-          thumb_down
-        </i>
+          <i className="material-icons" id="like">
+            favorite
+          </i>
+          <div className="like-count text-black">{likeCount}</div>
+        </div>
       ) : (
-        <i
-          className="material-icons cursor-pointer"
+        <div
+          className="btn-floating halfway-fab waves-effect waves-light white"
           onClick={() => likePost(singlePost._id, setLikeCount, setUserLiked)}
         >
-          thumb_up
-        </i>
+          <i className="material-icons red-text text-darken-4" id="like">
+            favorite
+          </i>
+          <div className="like-count text-white">{likeCount}</div>
+        </div>
       )}
-      <h6>{likeCount} likes</h6>
     </>
   );
 }
