@@ -7,7 +7,7 @@ import { UserContext } from "../../App";
 
 export default function CommentSection({ singlePost }) {
   const [comments, setComments] = useState(singlePost.comments);
-  const { state, dispatch } = useContext(UserContext);
+  const { state } = useContext(UserContext);
 
   return (
     <>
