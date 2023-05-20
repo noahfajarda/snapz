@@ -15,7 +15,7 @@ app.use(require("./routes"))
 
 if (process.env.NODE_ENV == 'production') {
   // serve the static HTML file
-  app.use(express.static("client/build"))
+  app.use(express.static("../client/build"))
   // ANY requests client will make will be forwarded to the build -> "index.html"
   // all react routes will be in index.html
   app.get("*", (req, res) => {
