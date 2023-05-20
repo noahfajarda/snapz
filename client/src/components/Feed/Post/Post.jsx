@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
 // retrieve user with context
-import { UserContext } from "../../App";
+import { UserContext } from "../../../App";
 // API CALLS
-import { deletePost } from "../../utils/APICalls/HomeAPICalls";
+import { deletePost } from "../../../utils/APICalls/HomeAPICalls";
 // COMPONENTS
-import CommentSection from "./CommentSection";
-import LikesSection from "./LikesSection/LikesSection";
+import CommentSection from "../CommentSection/CommentSection";
+import LikesSection from "../LikesSection/LikesSection";
 // css
 import "./Post.css";
 
@@ -18,7 +18,7 @@ export default function Post({ singlePost, postsData, setPostsData }) {
 
   return (
     <div className="card home-card">
-      <div class="card-header">
+      <div className="card-header">
         <div>
           <Link
             to={
@@ -26,10 +26,10 @@ export default function Post({ singlePost, postsData, setPostsData }) {
                 ? `/profile/${singlePost.postedBy._id}`
                 : `/profile`
             }
-            class="flex"
+            className="flex"
           >
             <img
-              class="profile-image"
+              className="profile-image"
               src={
                 singlePost.postedBy.profilePicURL
                   ? singlePost.postedBy.profilePicURL
@@ -37,7 +37,7 @@ export default function Post({ singlePost, postsData, setPostsData }) {
               }
               alt=""
             />
-            <h1 class="profile-name">{singlePost.postedBy.name}</h1>
+            <h1 className="profile-name">{singlePost.postedBy.name}</h1>
           </Link>
         </div>
 

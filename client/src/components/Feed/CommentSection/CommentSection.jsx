@@ -2,8 +2,8 @@ import React, { useContext, useState } from "react";
 import {
   commentOnPost,
   deleteComment,
-} from "../../utils/APICalls/HomeAPICalls";
-import { UserContext } from "../../App";
+} from "../../../utils/APICalls/HomeAPICalls";
+import { UserContext } from "../../../App";
 import "./CommentSection.css";
 
 export default function CommentSection({ singlePost }) {
@@ -16,7 +16,7 @@ export default function CommentSection({ singlePost }) {
         {/* iterate through comments to display */}
         {comments.map((comment) => (
           <div key={comment._id} className="comment">
-            <div>
+            <div className="comment-text-container">
               <strong className="commented-by">{comment.postedBy.name}</strong>{" "}
               {comment.text}
             </div>

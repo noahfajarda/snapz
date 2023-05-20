@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 // API CALLS
 import { retrieveAllPosts } from "../utils/APICalls/HomeAPICalls";
 // COMPONENTS
-import Post from "../components/Feed/Post";
+import Post from "../components/Feed/Post/Post";
 
 export default function Home() {
   // initialize 'posts data' variable

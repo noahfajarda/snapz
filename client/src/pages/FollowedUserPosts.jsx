@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 // API CALLS
 import { retrieveAllFollowedPosts } from "../utils/APICalls/FollowedUserPostAPICalls";
 // COMPONENTS
-import Post from "../components/Feed/Post";
+import Post from "../components/Feed/Post/Post";
 
 export default function Home() {
   // initialize 'posts data' variable
