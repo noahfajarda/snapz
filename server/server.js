@@ -6,8 +6,8 @@ const db = require("./config/connection")
 const path = require('path')
 
 // import mongoose DB models
-require('./models/user')
-require('./models/post')
+require('./models/User')
+require('./models/Post')
 // allow routes to read JSON data
 app.use(express.json())
 // import routes as middleware
