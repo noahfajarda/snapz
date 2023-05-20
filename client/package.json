@@ -19,7 +19,8 @@
     "start": "react-scripts start && node -r dotenv/config ./src/utils/uploadImage.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "coverage": "npm run test --coverage --watchall"
   },
   "eslintConfig": {
     "extends": [
@@ -40,6 +41,7 @@
     ]
   },
   "devDependencies": {
+    "@types/jest": "^29.5.1",
     "tailwindcss": "^3.3.2"
   }
 }

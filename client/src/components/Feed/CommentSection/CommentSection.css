@@ -1,0 +1,33 @@
+/* comment section */
+.comments {
+  font-size: 18px;
+  padding-top: 5px;
+  padding-bottom: 30px;
+  overflow-y: auto;
+  margin-bottom: 40px;
+  max-height: 150px;
+}
+
+.comment {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+}
+
+.comment-text-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.delete-comment {
+  padding: 10px;
+  margin: 10px;
+  border-radius: 10px;
+}
+
+.commented-by {
+  font-weight: bolder;
+  font-size: 16px;
+  display: flex;
+}

@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const { MONGOURI } = require('../keys')
+const { MONGOURI } = require('./keys')
 
 // mongoDB connection
 mongoose.connect(MONGOURI, {

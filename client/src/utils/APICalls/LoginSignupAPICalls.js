@@ -1,5 +1,6 @@
 // import materialize to handle error
 import M from "materialize-css";
+const { REACT_APP_UPLOAD_PRESET, REACT_APP_CLOUD_NAME } = process.env;
 
 export const attemptLogin = (state, User, navigate) => {
   // submit signup data to DB
@@ -79,3 +80,36 @@ export const attemptSignup = async (state, navigate) => {
     console.log(err);
   }
 }
+
+export const postProfilePic = async (pic) => {
+  const data = new FormData();
+  data.append("file", pic);
+  data.append("upload_preset", REACT_APP_UPLOAD_PRESET);
+  data.append("cloud_name", REACT_APP_CLOUD_NAME);
+  // specify folder
+  data.append("folder", "Instagram-Clone/profile-Pics");
+
+  try {
+    const response = await fetch(
+      `https://api.cloudinary.com/v1_1/${REACT_APP_CLOUD_NAME}/image/upload`,
+      {
+        method: "POST",
+        body: data,
+      }
+    );
+    // asset POST response data & return the asset URL alone
+    const assetData = await response.json();
+
+    // handle error
+    if (assetData?.error?.message) {
+      // show pop-up
+      M.toast({
+        html: assetData.error.message,
+        classes: "#c62828 red darken-3",
+      });
+    }
+    return assetData.url;
+  } catch (err) {
+    console.error(err);
+  }
+};

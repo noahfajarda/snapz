@@ -9,6 +9,8 @@ const User = mongoose.model("User")
 // will check if the JWT is valid/exists as a header
 const requireLogin = require("../middleware/requireLogin")
 
+// protected routes (w/ middlewares)
+// will only run if it JWT is valid and User data is retrieved
 
 // retrieve USER & POSTS data from logged in user
 router.get("/user/:id", requireLogin, async (req, res) => {
@@ -70,11 +72,12 @@ router.put("/unfollow", requireLogin, async (req, res) => {
 
 router.put("/updatepic", requireLogin, async (req, res) => {
   try {
-    console.log(req.body.profilePicURL)
+    // find logged in user and update profile pic url with new one
     const updatePic = await User.findByIdAndUpdate(req.user._id, {
       $set: { profilePicURL: req.body.profilePicURL },
     }, { new: true })
 
+    // send the response back
     res.json(updatePic);
   } catch (err) {
     console.log(err)

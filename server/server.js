@@ -1,7 +1,9 @@
 const express = require('express');
 const app = express()
-const PORT = 3001
+const PORT = process.env.PORT || 3001
 const db = require("./config/connection")
+// path for deployment
+const path = require('path')
 
 // import mongoose DB models
 require('./models/user')
@@ -10,6 +12,16 @@ require('./models/post')
 app.use(express.json())
 // import routes as middleware
 app.use(require("./routes"))
+
+if (process.env.NODE_ENV == 'production') {
+  // serve the static HTML file
+  app.use(express.static("client/build"))
+  // ANY requests client will make will be forwarded to the build -> "index.html"
+  // all react routes will be in index.html
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"))
+  })
+}
 
 // run server
 db.once('open', () => {

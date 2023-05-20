@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- MATERIALIZE -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!-- MATERIAL ICONS -->
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+
+    <!-- style.css -->
+    <link rel="stylesheet" href="style.css" />
+
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="row">
+      <div class="col s12 m6">
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <img
+                class="profile-image"
+                src="https://res.cloudinary.com/fajarda1storage/image/upload/v1684468666/Instagram-Clone/fyhlcadxqpodo9ii8upb.jpg"
+                alt=""
+              />
+              <h1 class="profile-name">JasonP</h1>
+            </div>
+            <i class="material-icons medium">delete</i>
+          </div>
+
+          <div class="card-image">
+            <img
+              class="post-image"
+              src="https://res.cloudinary.com/fajarda1storage/image/upload/v1684469191/Instagram-Clone/piw4vfr61emujefg1kwh.jpg"
+            />
+            <span class="card-title">Post Title</span>
+            <a
+              class="btn-floating halfway-fab waves-effect waves-light red"
+              onClick="toggleLike()"
+              ><i class="material-icons" id="like">favorite</i>
+              <div class="like-count">90000</div>
+            </a>
+          </div>
+
+          <div class="card-content">
+            <p class="posted-by-section">
+              <strong class="posted-by">JasonP</strong>
+              I am a very simple card. I am good at containing small bits of
+              information. I am convenient because I require little markup to
+              use effectively.
+            </p>
+            <div class="comment-section">
+              <div class="comments">
+                <div class="comment">
+                  <div>
+                    <strong class="commented-by">Commenter</strong>
+                    comment
+                  </div>
+                  <button class="delete-comment">delete</button>
+                </div>
+                <div class="comment">
+                  <div>
+                    <strong class="commented-by">Commenter</strong>
+                    comment
+                  </div>
+                  <button class="delete-comment">delete</button>
+                </div>
+                <div class="comment">
+                  <div>
+                    <strong class="commented-by">Commenter</strong>
+                    comment
+                  </div>
+                </div>
+              </div>
+              <form class="add-comment">
+                <input
+                  type="text"
+                  placeholder="Just Use The Styling You Already Have"
+                />
+                <button type="submit">Comment</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="script.js"></script>
+</html>

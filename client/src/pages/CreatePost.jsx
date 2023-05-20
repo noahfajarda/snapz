@@ -1,29 +1,13 @@
 import React, { useEffect, useReducer, useState } from "react";
 import { useNavigate } from "react-router-dom";
+// API calls
 import {
   postDetails,
   createPost,
 } from "../utils/APICalls/CreatePostAPICalls/uploadImage";
-import FileTypeDropdown from "../components/FileTypeDropdown/FileTypeDropdown";
-
-// WAY TO INPUT FILES
-function FileInput({ state, dispatch }) {
-  return (
-    <div className="file-field input-field">
-      <div className="btn #64b5f6 blue darken-1">
-        <span>Upload {state.type}</span>
-        {/* UPLOAD IMAGE WITH 'CLOUDINARY' (refer to readme) */}
-        <input
-          type="file"
-          onChange={(e) => dispatch({ asset: e.target.files[0] })}
-        />
-      </div>
-      <div className="file-path-wrapper">
-        <input className="file-path validate" type="text" />
-      </div>
-    </div>
-  );
-}
+// components
+import FileTypeDropdown from "../components/CreatePost/FileTypeDropdown/FileTypeDropdown";
+import FileInput from "../components/CreatePost/FileInput";
 
 export default function CreatePost() {
   const navigate = useNavigate();
@@ -48,14 +32,17 @@ export default function CreatePost() {
   useEffect(() => {
     if (!state.assetUrl) return;
 
+    // create the new post
     createPost(state, navigate);
     setLoadingText("Post Created!");
   }, [state.assetUrl, navigate, state]);
 
+  // function for form submission
   const handlePostSubmit = async (e) => {
     e.preventDefault();
+    setLoadingText("Loading...");
+
     try {
-      setLoadingText("Loading...");
       // post asset to cloudinary DB
       const assetUrl = await postDetails(state.asset, state.type, navigate);
 
@@ -68,15 +55,7 @@ export default function CreatePost() {
 
   return (
     <React.Fragment>
-      <div
-        className="card input-filed"
-        style={{
-          margin: "30px auto",
-          maxWidth: "500px",
-          padding: "20px",
-          textAlign: "center",
-        }}
-      >
+      <div className="card input-filed mx-auto my-8 max-w-xl p-5 text-center">
         Create Post
         <form onSubmit={handlePostSubmit}>
           {/* title & body state variables */}

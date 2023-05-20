@@ -1,0 +1,86 @@
+:root {
+  --profile-pic-size: 70px;
+}
+
+/* post */
+.post {
+  animation: fadeIn 2s;
+}
+
+/* posted by */
+.posted-by-section {
+  font-size: 22px;
+  padding-bottom: 5px;
+}
+
+.posted-by {
+  font-weight: 800;
+  font-size: 25px;
+}
+
+/* card content */
+.card .card-content {
+  padding: 30px;
+}
+
+/* card image */
+.card .card-image img {
+  border-radius: 40px 40px 0px 0px;
+}
+
+/* card title */
+.card-title {
+  background-color: rgba(255, 255, 255, 0.887);
+  border-radius: 20px;
+  font-size: 15px;
+}
+
+.card .card-image .card-title {
+  color: black;
+  bottom: 20px;
+  left: 25px;
+  padding: 10px 25px;
+  font-weight: 500;
+}
+
+.profile-image {
+  height: var(--profile-pic-size);
+  width: var(--profile-pic-size);
+  border-radius: 60px;
+}
+
+.profile-name {
+  margin: 20px;
+  display: flex;
+  align-items: center;
+}
+
+/* card header */
+.card-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.card-header > div {
+  display: flex;
+  flex-direction: row;
+  padding: 20px 33px 10px 33px;
+}
+
+.material-icons {
+  display: flex;
+  align-items: center;
+  width: 110px;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateX(-600px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

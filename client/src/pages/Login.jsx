@@ -2,11 +2,10 @@ import React, { useReducer, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 // import validate email util
 import validateEmail from "../utils/validateEmail";
-
 // retrieve user data from user context wrapper
 import { UserContext } from "../App";
+// API call to attempt login
 import { attemptLogin } from "../utils/APICalls/LoginSignupAPICalls";
-
 // import materialize to handle error
 import M from "materialize-css";
 
@@ -44,7 +43,7 @@ export default function Login() {
   };
 
   return (
-    <div className="my-card">
+    <div className="mt-8">
       <div className="card auth-card input-field">
         <h2 className="brand-logo">Instagram</h2>
         <form onSubmit={handleLogin}>

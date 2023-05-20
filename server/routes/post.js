@@ -181,15 +181,16 @@ router.delete("/deletecomment/:postId/:commentId", requireLogin, async (req, res
     // check if the comment's user id == the logged in user
     if (comment[0].postedBy.toString() === req.user._id.toString()) {
       // find the post to delete comment
-      const newPost = await Post.findOneAndUpdate({ _id: req.params.postId }, {
+      const deletedComment = await Post.findOneAndUpdate({ _id: req.params.postId }, {
         $pull: { comments: { _id: req.params.commentId } }
       }, {
         new: true
       })
         .populate("comments.postedBy", "_id name")
-        .then(data => res.json(data))
-    }
 
+      // respond with new comment
+      res.json(deletedComment)
+    }
   } catch (err) {
     console.log(err)
     return res.status(422).json({ error: err })
