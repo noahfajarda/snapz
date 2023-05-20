@@ -5,6 +5,7 @@ technologies used:
 - bcrypt
 - jwt
 - cloudinary
+- tailwind
 
 WAY TO FIX CORS ERROR when connecting FE to BE:
 FIX THE ERROR FETCHING DB TO THE CLIENT-SIDE PORT

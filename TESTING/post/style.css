@@ -1,0 +1,121 @@
+:root {
+  --button-dimensions: 120px;
+}
+
+.card {
+  width: 800px;
+  height: fit-content;
+  border-radius: 90px;
+}
+
+/* card image */
+.card .card-image img {
+  border-radius: 90px 90px 0px 0px;
+  height: 700px;
+}
+
+/* card header */
+.card-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.card-header > div {
+  display: flex;
+  flex-direction: row;
+  padding: 20px 33px 10px 33px;
+}
+
+.material-icons {
+  display: flex;
+  align-items: center;
+  width: 110px;
+}
+
+.profile-image {
+  height: 120px;
+  width: 120px;
+  border-radius: 60px;
+}
+
+.profile-name {
+  margin: 20px;
+}
+
+.card-title {
+  background-color: rgba(255, 255, 255, 0.363);
+  border-radius: 20px;
+}
+
+.card .card-image .card-title {
+  color: black;
+  bottom: 20px;
+  left: 25px;
+}
+
+/* card content */
+.card .card-content {
+  padding: 30px;
+}
+
+/* posted by */
+.posted-by-section {
+  font-size: 22px;
+  padding-bottom: 5px;
+}
+
+.posted-by {
+  font-weight: bolder;
+  font-size: 25px;
+}
+
+/* comment section */
+.comments {
+  font-size: 18px;
+  padding-top: 5px;
+  padding-bottom: 30px;
+  overflow-y: auto;
+  margin-bottom: 40px;
+  max-height: 150px;
+}
+
+.comment {
+  display: flex;
+  justify-content: space-between;
+}
+
+.delete-comment {
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.commented-by {
+  font-weight: bolder;
+  font-size: 21px;
+}
+
+.add-comment {
+  display: flex;
+}
+
+/* likes */
+.like-count {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  bottom: 86px;
+  color: black;
+  font-size: 20px;
+}
+
+/* button */
+.btn-floating {
+  width: var(--button-dimensions);
+  height: var(--button-dimensions);
+}
+
+.btn-floating i {
+  font-size: 5.7rem;
+  line-height: 130px;
+}

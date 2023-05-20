@@ -17,7 +17,7 @@ export default function Post({ singlePost, postsData, setPostsData }) {
   const { state } = useContext(UserContext);
 
   return (
-    <div className="card home-card">
+    <div className="card home-card post">
       <div className="card-header">
         <div>
           <Link

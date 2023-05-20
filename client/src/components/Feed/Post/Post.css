@@ -2,6 +2,11 @@
   --profile-pic-size: 70px;
 }
 
+/* post */
+.post {
+  animation: fadeIn 2s;
+}
+
 /* posted by */
 .posted-by-section {
   font-size: 22px;
@@ -67,4 +72,15 @@
   display: flex;
   align-items: center;
   width: 110px;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateX(-600px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
