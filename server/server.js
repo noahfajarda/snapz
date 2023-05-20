@@ -19,7 +19,8 @@ if (process.env.NODE_ENV == 'production') {
   // ANY requests client will make will be forwarded to the build -> "index.html"
   // all react routes will be in index.html
   app.get("*", (req, res) => {
-    res.sendFile(path.resolve("client", "build", "index.html"))
+    res.send("hello")
+    // res.sendFile(path.resolve(__dirname, "client", "build", "index.html"))
   })
 }
 
