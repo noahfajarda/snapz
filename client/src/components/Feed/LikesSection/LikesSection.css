@@ -1,5 +1,5 @@
 :root {
-  --button-dimensions: 120px;
+  --button-dimensions: 85px;
 }
 
 /* likes */
@@ -7,7 +7,7 @@
   position: relative;
   display: flex;
   justify-content: center;
-  bottom: 86px;
+  bottom: 70px;
   font-size: 20px;
 }
 
@@ -18,6 +18,6 @@
 }
 
 .btn-floating i {
-  font-size: 5.7rem;
-  line-height: 130px;
+  font-size: 4.5rem;
+  line-height: 90px;
 }

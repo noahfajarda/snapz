@@ -46,6 +46,7 @@
   max-width: 500px;
   margin: 26px auto;
   height: max-content;
+  border-radius: 40px;
 }
 
 /* for 'toast' error */
