@@ -7,6 +7,7 @@ const { REACT_APP_UPLOAD_PRESET, REACT_APP_CLOUD_NAME } = process.env;
 // link to view assets = https://console.cloudinary.com/console/c-a93be4c19875cf5fd32251bfff624e/media_library/search?q=
 
 export async function postDetails(asset, type) {
+  console.log(process.env)
   const data = new FormData();
   data.append("file", asset);
   data.append("upload_preset", REACT_APP_UPLOAD_PRESET);
