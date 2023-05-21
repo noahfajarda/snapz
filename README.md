@@ -29,3 +29,5 @@ push to heroku:
 - git commit -m "MESSAGE"
 - git push heroku main
 - heroku logs --tail to see errors
+
+deployed App: https://new-social-media.herokuapp.com/
