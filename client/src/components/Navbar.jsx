@@ -66,30 +66,31 @@ export default function Navbar() {
   ];
 
   return (
-    <nav>
-      <div className="nav-wrapper">
-        <div>
-          {/* Link == WON'T REFRESH PAGE */}
-          <Link
-            // conditional for logo
-            to={state ? "/" : "/login"}
-            className="brand-logo left text-black"
-          >
-            Instagram
-          </Link>
-          {/* unique for search */}
-          {loggedIn && (
-            <li key={6}>
-              <i
-                data-target="modal1"
-                className="large material-icons modal-trigger search-users"
-                style={{ color: "black" }}
-              >
-                search
-              </i>
-            </li>
-          )}
-        </div>
+    <nav className="h-20 px-8 flex justify-between items-center">
+      {/* logo & search */}
+      <section className="flex justify-between w-1/12">
+        {/* Link == WON'T REFRESH PAGE */}
+        <Link
+          // conditional for logo
+          to={state ? "/" : "/login"}
+          className="brand-logo"
+        >
+          Instagram
+        </Link>
+        {/* unique for search */}
+        {loggedIn && (
+          <div className="search-users-button">
+            <i
+              data-target="modal1"
+              className="large material-icons modal-trigger text-black cursor-pointer"
+            >
+              search
+            </i>
+          </div>
+        )}
+      </section>
+      {/* right nav elements */}
+      <section>
         <ul id="nav-mobile" className="right">
           {/*  iterate through pages array to add to navbar  */}
           {pages.map((page, idx) => {
@@ -103,9 +104,9 @@ export default function Navbar() {
             return <div key={idx}></div>;
           })}
         </ul>
-      </div>
+      </section>
 
-      {/* search modal */}
+      {/* modal */}
       <div
         id="modal1"
         className="modal"
@@ -125,7 +126,7 @@ export default function Navbar() {
             className="text-black"
             onChange={(e) => fetchUsers(e.target.value)}
           />
-          <ul className="collection flex flex-col">
+          <ul className="flex flex-col">
             {userDetails?.user &&
               userDetails?.user.map((item) => (
                 <Link
@@ -136,11 +137,13 @@ export default function Navbar() {
                   onClick={async () => {
                     M.Modal.getInstance(searchModal.current).close();
                     setSearch("");
-
+                    // don't refresh page if it's the current user
+                    if (item._id === state._id) return;
                     // check for pathname
-                    window.location.pathname.startsWith("/profile/") &&
+                    if (window.location.pathname.startsWith("/profile/")) {
                       navigate(`/profile/${item._id}`);
-                    window.location.reload();
+                      window.location.reload();
+                    }
                   }}
                 >
                   <li className="collection-item text-black">{item.email}</li>

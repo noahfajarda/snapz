@@ -9,6 +9,15 @@
   font-size: 100px;
 }
 
+nav .brand-logo {
+  position: static;
+}
+
+nav i.material-icons {
+  width: 20px;
+  line-height: 67px;
+}
+
 .auth-card {
   padding: 20px;
   text-align: center;
