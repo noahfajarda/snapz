@@ -85,4 +85,15 @@ router.put("/updatepic", requireLogin, async (req, res) => {
   }
 })
 
+router.post("/search-users", (req, res) => {
+  // find all records that start with the "search term"
+  let userPattern = new RegExp("^" + req.body.query)
+  User.find({ email: { $regex: userPattern } })
+    // only retrieve _id & email
+    .select("_id email")
+    .then(user => res.json({ user }))
+    .catch(err => console.log(err))
+
+})
+
 module.exports = router;
