@@ -72,6 +72,9 @@ export default function Login() {
         <h5>
           Don't have an account? Click <Link to="/signup">here</Link>!
         </h5>
+        <h5>
+          <Link to="/reset">Forgot Password?</Link>
+        </h5>
       </div>
     </div>
   );
