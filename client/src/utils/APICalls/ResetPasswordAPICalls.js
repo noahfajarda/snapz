@@ -2,6 +2,7 @@ import M from "materialize-css";
 
 // function to reset password
 export const sendResetEmail = async (email, navigate) => {
+  // send API post request with email to update password
   const sendResetEmailData = await fetch("/reset-password", {
     method: "POST",
     headers: {
@@ -33,6 +34,7 @@ export const sendResetEmail = async (email, navigate) => {
 
 // function to reset password
 export const setNewPassword = async (password, token, navigate) => {
+  // send API post request with new password and token
   const resetPassData = await fetch("/new-password", {
     method: "POST",
     headers: {
