@@ -14,6 +14,13 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  // reset password token & it's expiration date
+  resetToken: {
+    type: String
+  },
+  expireToken: {
+    type: Date
+  },
   profilePicURL: {
     type: String,
     default: "https://res.cloudinary.com/fajarda1storage/image/upload/v1684359424/no-user-image_k1gv0g.gif"
