@@ -19,8 +19,10 @@
   "homepage": "https://github.com/noahfajarda/social-media#readme",
   "dependencies": {
     "bcrypt": "^5.1.0",
+    "crypto": "^1.0.1",
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.0",
-    "mongoose": "^7.1.0"
+    "mongoose": "^7.1.0",
+    "nodemailer": "^6.9.2"
   }
 }
