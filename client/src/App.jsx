@@ -5,6 +5,7 @@ import {
   Route,
   Routes,
   useNavigate,
+  useLocation,
 } from "react-router-dom";
 
 // components
@@ -18,15 +19,18 @@ import Profile from "./pages/MyProfile";
 import CreatePost from "./pages/CreatePost";
 import UserProfile from "./pages/UserProfile";
 import FollowedUserPosts from "./pages/FollowedUserPosts";
+import ResetPassword from "./pages/ResetPassword";
 
 // custom reducer hook
 import { initialState, reducer } from "./utils/reducerCustomHook/userReducer";
+import NewPassword from "./pages/NewPassword";
 
 // create/export context
 export const UserContext = createContext();
 
 // separate component to access 'useNavigate'
 const Routing = () => {
+  const location = useLocation();
   const navigate = useNavigate();
   const User = useContext(UserContext);
 
@@ -39,7 +43,8 @@ const Routing = () => {
       // set user data as payload for user context
       User.dispatch({ type: "USER", payload: user });
       return;
-    }
+      // redirect to '/reset' regardless
+    } else if (location.pathname.includes("/reset")) return;
     navigate("/login");
   }, []);
 
@@ -48,6 +53,8 @@ const Routing = () => {
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
+      <Route exact path="/reset" element={<ResetPassword />} />
+      <Route path="/reset/:token" element={<NewPassword />} />
       {/* match the EXACT path */}
       <Route exact path="/profile" element={<Profile />} />
       <Route path="/create" element={<CreatePost />} />
