@@ -66,6 +66,10 @@ button.bg-sky-300:hover {
   color: white;
 }
 
+.search-users {
+  cursor: pointer;
+}
+
 /* default styling */
 h1 {
   font-size: 2em;
