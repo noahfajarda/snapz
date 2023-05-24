@@ -13,6 +13,7 @@ technologies used:
 TODO:
 replace local storage 'setItem' with context variables soon
 be able to sign in with email OR username
+create an alternative name
 
 deployed App: https://new-social-media.herokuapp.com/
 
