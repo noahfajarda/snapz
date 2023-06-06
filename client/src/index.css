@@ -3,10 +3,11 @@
 @tailwind utilities;
 
 @import url("https://fonts.googleapis.com/css2?family=Grand+Hotel&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Comfortaa&display=swap");
 
 .brand-logo {
-  font-family: "Grand Hotel", cursive;
-  font-size: 100px;
+  font-family: "Comfortaa", cursive;
+  font-size: 4.5vw;
 }
 
 nav .brand-logo {
