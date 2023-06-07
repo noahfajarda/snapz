@@ -35,7 +35,7 @@ Click [here](https://new-social-media.herokuapp.com/) to view the deployed appli
 
 ## Description
 
-A social media app where you can share moments in time through photos and videos and your thoughts about them with your friends! Connect and keep up to date with what your friends are doing.
+A social media app where users can share moments in time through photos and videos and their thoughts about them with friends! Connect and keep up to date with what friends are doing.
 
 ## Installation
 
