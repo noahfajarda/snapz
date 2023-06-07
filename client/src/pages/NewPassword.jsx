@@ -21,7 +21,7 @@ export default function NewPassword() {
   return (
     <div className="mt-8">
       <div className="card auth-card input-field">
-        <h2 className="brand-logo">Instagram</h2>
+        <h2 className="brand-logo">Snapz</h2>
         <form onSubmit={setNewPasswordForm}>
           {/* put state variables in inputs */}
           <input

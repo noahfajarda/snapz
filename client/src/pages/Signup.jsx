@@ -62,7 +62,7 @@ export default function Signup() {
   return (
     <div className="mt-8">
       <div className="card auth-card input-field">
-        <h2 className="brand-logo sign-up">Instagram</h2>
+        <h2 className="brand-logo sign-up">Snapz</h2>
         <form onSubmit={handleSignup}>
           {/* put state variables in inputs */}
           <input

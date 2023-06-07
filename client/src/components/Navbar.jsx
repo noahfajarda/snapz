@@ -66,20 +66,20 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="h-20 px-8 flex justify-between items-center">
+    <nav className="flex justify-between items-center h-20 px-8 bg-gradient-to-r from-blue-500 to-cyan-500">
       {/* logo & search */}
-      <section className="flex justify-between w-1/12">
+      <section className="flex">
         {/* Link == WON'T REFRESH PAGE */}
         <Link
           // conditional for logo
           to={state ? "/" : "/login"}
-          className="brand-logo"
+          className="brand-logo px-3"
         >
-          Instagram
+          Snapz
         </Link>
         {/* unique for search */}
         {loggedIn && (
-          <div className="search-users-button">
+          <div className="px-3">
             <i
               data-target="modal1"
               className="large material-icons modal-trigger text-black cursor-pointer"
@@ -90,7 +90,7 @@ export default function Navbar() {
         )}
       </section>
       {/* right nav elements */}
-      <section>
+      <section className="flex">
         <ul id="nav-mobile" className="right">
           {/*  iterate through pages array to add to navbar  */}
           {pages.map((page, idx) => {
