@@ -53,8 +53,8 @@ router.post("/signup", async (req, res) => {
     transporter.sendMail({
       from: "instagram-clone-name@outlook.com",
       to: email,
-      subject: "Sending email with node.js!",
-      html: `<h1>Welcome To Instagram ${name}!</h1>
+      subject: "Thanks For Registering With Snapz!",
+      html: `<h1>Welcome To Snapz ${name}!</h1>
       <br/>
       <br/>
       <p>We hope you enjoy using our platform!</p>
