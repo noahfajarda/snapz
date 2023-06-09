@@ -30,7 +30,7 @@ export default function Login() {
     e.preventDefault();
 
     // check if email is valid in format
-    if (!validateEmail(state.email)) {
+    if (!validateEmail(state.email.toLowerCase())) {
       M.toast({
         html: "Invalid Email!",
         classes: "#c62828 red darken-3",

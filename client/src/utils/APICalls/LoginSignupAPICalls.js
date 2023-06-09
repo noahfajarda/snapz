@@ -10,8 +10,8 @@ export const attemptLogin = (state, User, navigate) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
+      email: state.email.toLowerCase(),
       password: state.password,
-      email: state.email,
     }),
   })
     .then((res) => res.json())
@@ -54,7 +54,7 @@ export const attemptSignup = async (state, navigate) => {
       },
       body: JSON.stringify({
         name: state.name,
-        email: state.email,
+        email: state.email.toLowerCase(),
         password: state.password,
         profilePicURL: state.profilePicURL,
       }),
