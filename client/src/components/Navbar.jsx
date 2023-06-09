@@ -65,6 +65,8 @@ export default function Navbar() {
     },
   ];
 
+  const [isNavExpanded, setIsNavExpanded] = useState(false);
+
   return (
     <nav className="flex justify-between items-center h-20 px-8 bg-gradient-to-r from-blue-500 to-cyan-500">
       {/* logo & search */}
@@ -97,13 +99,79 @@ export default function Navbar() {
             // display based on if user is logged in or not
             const bool = loggedIn === page.loggedIn;
             if (bool) {
-              return RenderPage(idx, page, navigate, dispatch);
+              return RenderPage(
+                idx,
+                page,
+                navigate,
+                dispatch,
+                setIsNavExpanded
+              );
             } else if (bool === undefined) {
-              return RenderPage(idx, page, navigate, dispatch);
+              return RenderPage(
+                idx,
+                page,
+                navigate,
+                dispatch,
+                setIsNavExpanded
+              );
             }
             return <div key={idx}></div>;
           })}
         </ul>
+      </section>
+
+      <section className="flex mobile-section">
+        {/* mobile nav */}
+        <div
+          className={
+            isNavExpanded ? "navigation-menu expanded" : "navigation-menu"
+          }
+        >
+          <ul>
+            {pages.map((page, idx) => {
+              const bool = loggedIn === page.loggedIn;
+              if (bool) {
+                return RenderPage(
+                  idx,
+                  page,
+                  navigate,
+                  dispatch,
+                  setIsNavExpanded
+                );
+              } else if (bool === undefined) {
+                return RenderPage(
+                  idx,
+                  page,
+                  navigate,
+                  dispatch,
+                  setIsNavExpanded
+                );
+              }
+              return <div key={idx}></div>;
+            })}
+          </ul>
+        </div>
+        {/* mobile nav button */}
+        <div className="flex mobile-nav-container">
+          <div className="hamburger">Menu</div>
+          <button
+            className="hamburger"
+            onClick={() => {
+              setIsNavExpanded(!isNavExpanded);
+            }}
+          >
+            <svg
+              height="32px"
+              id="Layer_1"
+              version="1.1"
+              viewBox="0 0 32 32"
+              width="32px"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M4,10h24c1.104,0,2-0.896,2-2s-0.896-2-2-2H4C2.896,6,2,6.896,2,8S2.896,10,4,10z M28,14H4c-1.104,0-2,0.896-2,2  s0.896,2,2,2h24c1.104,0,2-0.896,2-2S29.104,14,28,14z M28,22H4c-1.104,0-2,0.896-2,2s0.896,2,2,2h24c1.104,0,2-0.896,2-2  S29.104,22,28,22z" />
+            </svg>
+          </button>
+        </div>
       </section>
 
       {/* modal */}
@@ -157,7 +225,7 @@ export default function Navbar() {
 }
 
 // render accesible nav element
-function RenderPage(idx, page, navigate, dispatch) {
+function RenderPage(idx, page, navigate, dispatch, setIsNavExpanded) {
   // log out functionality
   const handleLogout = () => {
     localStorage.clear();
@@ -168,7 +236,13 @@ function RenderPage(idx, page, navigate, dispatch) {
   if (page.page === "logout") {
     return (
       <li key={idx}>
-        <button className="btn #c62828 red darken-3" onClick={handleLogout}>
+        <button
+          className="btn #c62828 red darken-3"
+          onClick={() => {
+            setIsNavExpanded(false);
+            handleLogout();
+          }}
+        >
           {capitalizeFirstLetter(page.page)}
         </button>
       </li>
@@ -177,7 +251,11 @@ function RenderPage(idx, page, navigate, dispatch) {
 
   return (
     <li key={idx}>
-      <Link to={`/${page.page}`} className="text-black">
+      <Link
+        to={`/${page.page}`}
+        className="text-black"
+        onClick={() => setIsNavExpanded(false)}
+      >
         {capitalizeFirstLetter(page.page)}
       </Link>
     </li>

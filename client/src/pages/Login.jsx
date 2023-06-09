@@ -69,12 +69,21 @@ export default function Login() {
             Log In
           </button>
         </form>
-        <h5>
-          Don't have an account? Click <Link to="/signup">here</Link>!
-        </h5>
-        <h5>
-          <Link to="/reset">Forgot Password?</Link>
-        </h5>
+        <div className="p-5">
+          <h5>
+            Don't have an account? Click{" "}
+            <Link
+              to="/signup"
+              className="text-blue-500 visited:text-purple-600"
+            >
+              here
+            </Link>
+            !
+          </h5>
+          <h5>
+            <Link to="/reset">Forgot Password?</Link>
+          </h5>
+        </div>
       </div>
     </div>
   );

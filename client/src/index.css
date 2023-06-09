@@ -21,6 +21,85 @@ nav i.material-icons {
   line-height: 67px;
 }
 
+.hamburger,
+.navigation-menu,
+.mobile-section {
+  display: none;
+  color: black;
+}
+
+@media screen and (max-width: 800px) {
+  #nav-mobile {
+    display: none;
+  }
+  .navigation-menu {
+    margin-left: auto;
+  }
+
+  .navigation-menu ul {
+    display: none;
+    padding: 0;
+  }
+
+  .navigation-menu li {
+    list-style-type: none;
+    margin: 0 1rem;
+  }
+
+  .navigation-menu li a {
+    text-decoration: none;
+    display: block;
+    width: 100%;
+  }
+  .hamburger,
+  .mobile-section {
+    display: block;
+  }
+
+  .mobile-nav-container {
+    width: 80px;
+    justify-content: space-between;
+  }
+
+  .navigation-menu ul {
+    flex-direction: column;
+    position: absolute;
+    top: 71px;
+    left: 0;
+    width: 100%;
+    height: fit-content;
+    background-color: white;
+    border-top: 1px solid black;
+    display: none;
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px,
+      rgba(0, 0, 0, 0.23) 0px 6px 6px;
+  }
+
+  .navigation-menu li {
+    text-align: center;
+    margin: 0;
+    border-top: solid black;
+  }
+
+  .navigation-menu li a {
+    color: black;
+    width: 100%;
+    padding: 1.5rem 0;
+  }
+
+  .navigation-menu li:hover {
+    background-color: #eee;
+  }
+
+  .navigation-menu.expanded {
+    display: block;
+  }
+  .navigation-menu.expanded ul {
+    display: flex;
+    z-index: 100;
+  }
+}
+
 .auth-card {
   padding: 20px;
   text-align: center;

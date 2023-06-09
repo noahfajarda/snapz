@@ -104,9 +104,15 @@ export default function Signup() {
             Sign Up
           </button>
         </form>
-        <h5>
-          Already have an account? Click <Link to="/login">here</Link>!
-        </h5>
+        <div className="p-5">
+          <h5>
+            Already have an account? Click{" "}
+            <Link to="/login" className="text-blue-500 visited:text-purple-600">
+              here
+            </Link>
+            !
+          </h5>
+        </div>
       </div>
     </div>
   );
