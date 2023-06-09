@@ -50,6 +50,7 @@ nav i.material-icons {
     text-decoration: none;
     display: block;
     width: 100%;
+    font-size: 20px;
   }
   .hamburger,
   .mobile-section {
