@@ -193,4 +193,7 @@ h6 {
   .auth-card {
     max-width: 95%;
   }
+  .brand-logo {
+    font-size: 6.5vw;
+  }
 }
