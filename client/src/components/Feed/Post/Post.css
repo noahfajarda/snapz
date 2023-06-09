@@ -84,3 +84,18 @@
     transform: translateX(0);
   }
 }
+
+@media screen and (max-width: 800px) {
+  .profile-name {
+    font-size: 20px;
+  }
+  .card .card-image .card-title {
+    font-size: 18px;
+  }
+  .posted-by-section {
+    font-size: 17px;
+  }
+  .posted-by {
+    font-size: 20px;
+  }
+}
