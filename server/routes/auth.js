@@ -63,7 +63,7 @@ router.post("/signup", async (req, res) => {
       `, // html body
     })
 
-    res.json({ message: "Saved Successfully" })
+    res.json({ message: "Saved Successfully. You Can Now Log In And Check Your Email For A Welcome Message!" })
 
   } catch (err) {
     console.log(err)
