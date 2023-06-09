@@ -190,4 +190,7 @@ h6 {
   #nav-mobile a {
     font-size: 2vw;
   }
+  .auth-card {
+    max-width: 95%;
+  }
 }
