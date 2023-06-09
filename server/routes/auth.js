@@ -52,10 +52,15 @@ router.post("/signup", async (req, res) => {
     // send an email to user that account has been saved successfully
     transporter.sendMail({
       from: "instagram-clone-name@outlook.com",
-      to: "nlicupfa@uci.edu",
+      to: email,
       subject: "Sending email with node.js!",
-      text: "wow, thats amazing",
-      html: `<h1>Welcome To Instagram</h1>`, // html body
+      html: `<h1>Welcome To Instagram ${name}!</h1>
+      <br/>
+      <br/>
+      <p>We hope you enjoy using our platform!</p>
+      <br/>
+      <p>Sincerely, Snapz Team</p>
+      `, // html body
     })
 
     res.json({ message: "Saved Successfully" })
