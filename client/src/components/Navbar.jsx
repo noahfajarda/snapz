@@ -68,7 +68,7 @@ export default function Navbar() {
   const [isNavExpanded, setIsNavExpanded] = useState(false);
 
   return (
-    <nav className="flex justify-between items-center h-20 px-8 bg-gradient-to-r from-blue-500 to-cyan-500">
+    <nav className="flex justify-between items-center h-20 px-8 bg-gradient-to-r from-blue-500 to-cyan-500 sticky top-0 z-50">
       {/* logo & search */}
       <section className="flex">
         {/* Link == WON'T REFRESH PAGE */}
