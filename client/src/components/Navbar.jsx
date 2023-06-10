@@ -85,7 +85,8 @@ export default function Navbar() {
           <div className="px-3">
             <i
               data-target="modal1"
-              className="large material-icons modal-trigger text-black cursor-pointer"
+              href="#modal1"
+              className="large material-icons modal-trigger text-black cursor-pointer modal-trigge"
             >
               search
             </i>
@@ -176,64 +177,68 @@ export default function Navbar() {
       </section>
 
       {/* modal */}
-      <div
-        id="modal1"
-        className="modal"
-        ref={searchModal}
-        style={{ color: "black" }}
-      >
-        <div className="modal-content">
-          <div className="modal-footer">
-            <button className="modal-close waves-effect waves-green btn-flat">
-              Close
-            </button>
+      {loggedIn && (
+        <div
+          id="modal1"
+          className="modal"
+          ref={searchModal}
+          style={{ color: "black" }}
+        >
+          <div className="modal-content">
+            <div className="modal-footer">
+              <button className="modal-close waves-effect waves-green btn-flat">
+                Close
+              </button>
+            </div>
+            <input
+              type="text"
+              placeholder="search users"
+              value={search}
+              className="text-black"
+              onChange={(e) => fetchUsers(e.target.value)}
+            />
+            <ul className="flex flex-col">
+              {userDetails?.user &&
+                userDetails?.user.map((item) => (
+                  <Link
+                    className="flex pt-4 pb-4"
+                    key={item._id}
+                    to={
+                      item._id !== state._id
+                        ? `/profile/${item._id}`
+                        : "/profile"
+                    }
+                    onClick={async () => {
+                      M.Modal.getInstance(searchModal.current).close();
+                      setSearch("");
+                      // don't refresh page if it's the current user
+                      if (item._id === state._id) return;
+                      // check for pathname
+                      if (window.location.pathname.startsWith("/profile/")) {
+                        navigate(`/profile/${item._id}`);
+                        window.location.reload();
+                      }
+                    }}
+                  >
+                    <img
+                      className="w-14 h-14 rounded-full mr-6 outline outline-offset-2 outline-slate-500"
+                      src={
+                        item.profilePicURL
+                          ? item.profilePicURL
+                          : "https://media.istockphoto.com/id/1332100919/vector/man-icon-black-icon-person-symbol.jpg?s=612x612&w=0&k=20&c=AVVJkvxQQCuBhawHrUhDRTCeNQ3Jgt0K1tXjJsFy1eg="
+                      }
+                      alt=""
+                    />
+                    <div className="flex flex-col ml-6">
+                      <h1 className="text-black">{item.name}</h1>
+                      <h3 className="text-slate-500">{item.email}</h3>
+                    </div>
+                  </Link>
+                ))}
+            </ul>
           </div>
-          <input
-            type="text"
-            placeholder="search users"
-            value={search}
-            className="text-black"
-            onChange={(e) => fetchUsers(e.target.value)}
-          />
-          <ul className="flex flex-col">
-            {userDetails?.user &&
-              userDetails?.user.map((item) => (
-                <Link
-                  className="flex pt-4 pb-4"
-                  key={item._id}
-                  to={
-                    item._id !== state._id ? `/profile/${item._id}` : "/profile"
-                  }
-                  onClick={async () => {
-                    M.Modal.getInstance(searchModal.current).close();
-                    setSearch("");
-                    // don't refresh page if it's the current user
-                    if (item._id === state._id) return;
-                    // check for pathname
-                    if (window.location.pathname.startsWith("/profile/")) {
-                      navigate(`/profile/${item._id}`);
-                      window.location.reload();
-                    }
-                  }}
-                >
-                  <img
-                    className="w-14 h-14 rounded-full mr-6 outline outline-offset-2 outline-slate-500"
-                    src={
-                      item.profilePicURL
-                        ? item.profilePicURL
-                        : "https://media.istockphoto.com/id/1332100919/vector/man-icon-black-icon-person-symbol.jpg?s=612x612&w=0&k=20&c=AVVJkvxQQCuBhawHrUhDRTCeNQ3Jgt0K1tXjJsFy1eg="
-                    }
-                    alt=""
-                  />
-                  <div className="flex flex-col ml-6">
-                    <h1 className="text-black">{item.name}</h1>
-                    <h3 className="text-slate-500">{item.email}</h3>
-                  </div>
-                </Link>
-              ))}
-          </ul>
         </div>
-      </div>
+      )}
     </nav>
   );
 }
