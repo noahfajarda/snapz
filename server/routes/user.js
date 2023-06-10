@@ -90,7 +90,7 @@ router.post("/search-users", (req, res) => {
   let userPattern = new RegExp("^" + req.body.query)
   User.find({ email: { $regex: userPattern } })
     // only retrieve _id & email
-    .select("_id email")
+    .select("_id email name profilePicURL")
     .then(user => res.json({ user }))
     .catch(err => console.log(err))
 

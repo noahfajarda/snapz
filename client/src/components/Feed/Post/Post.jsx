@@ -29,11 +29,11 @@ export default function Post({ singlePost, postsData, setPostsData }) {
             className="flex"
           >
             <img
-              className="profile-image"
+              className="profile-image outline outline-offset-2 outline-slate-500"
               src={
                 singlePost.postedBy.profilePicURL
                   ? singlePost.postedBy.profilePicURL
-                  : "https://www.seiu1000.org/sites/main/files/main-images/camera_lense_0.jpeg"
+                  : "https://media.istockphoto.com/id/1332100919/vector/man-icon-black-icon-person-symbol.jpg?s=612x612&w=0&k=20&c=AVVJkvxQQCuBhawHrUhDRTCeNQ3Jgt0K1tXjJsFy1eg="
               }
               alt=""
             />

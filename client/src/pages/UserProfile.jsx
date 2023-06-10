@@ -35,11 +35,11 @@ export default function UserProfile() {
           <div className="flex justify-around mx-0 my-5 border-b-2 border-b-gray-300 p-5">
             <div>
               <img
-                className="w-40 h-40 rounded-full"
+                className="w-40 h-40 rounded-full outline outline-offset-2 outline-slate-500"
                 src={
                   userProfile && userProfile.oneUser.profilePicURL
                     ? userProfile.oneUser.profilePicURL
-                    : "https://www.seiu1000.org/sites/main/files/main-images/camera_lense_0.jpeg"
+                    : "https://media.istockphoto.com/id/1332100919/vector/man-icon-black-icon-person-symbol.jpg?s=612x612&w=0&k=20&c=AVVJkvxQQCuBhawHrUhDRTCeNQ3Jgt0K1tXjJsFy1eg="
                 }
                 alt=""
               />
