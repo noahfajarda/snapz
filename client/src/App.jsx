@@ -45,6 +45,7 @@ const Routing = () => {
       return;
       // redirect to '/reset' regardless
     } else if (location.pathname.includes("/reset")) return;
+    else if (location.pathname.includes("/signup")) return;
     navigate("/login");
   }, []);
 

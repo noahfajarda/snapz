@@ -65,7 +65,7 @@ nav i.material-icons {
   .navigation-menu ul {
     flex-direction: column;
     position: absolute;
-    top: 71px;
+    top: 70px;
     left: 0;
     width: 100%;
     height: fit-content;
