@@ -85,8 +85,7 @@ export default function Navbar() {
           <div className="px-3">
             <i
               data-target="modal1"
-              href="#modal1"
-              className="large material-icons modal-trigger text-black cursor-pointer modal-trigger"
+              className="large material-icons modal-trigger text-black cursor-pointer"
             >
               search
             </i>
