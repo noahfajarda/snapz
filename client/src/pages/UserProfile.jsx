@@ -48,23 +48,39 @@ export default function UserProfile() {
               <h4>{userProfile.oneUser.name}</h4>
               <h4>{userProfile.oneUser.email}</h4>
               <div
+                className="flex flex-col justify-between"
                 style={{
-                  display: "flex",
-                  justifyContent: "space-between",
                   width: "108%",
                 }}
               >
-                {userProfile.userPosts.length === 1 ? (
-                  <h6>{userProfile.userPosts.length} post</h6>
-                ) : (
-                  <h6>{userProfile.userPosts.length} posts</h6>
-                )}
-                {userProfile.oneUser.followers.length === 1 ? (
-                  <h6>{userProfile.oneUser.followers.length} follower</h6>
-                ) : (
-                  <h6>{userProfile.oneUser.followers.length} followers</h6>
-                )}
-                <h6>{userProfile.oneUser.following.length} following</h6>
+                <div className="flex justify-between py-4">
+                  {userProfile.userPosts.length === 1 ? (
+                    <div className="flex flex-col items-center">
+                      <h6>{userProfile.userPosts.length}</h6>
+                      <h6>post</h6>
+                    </div>
+                  ) : (
+                    <div className="flex flex-col items-center">
+                      <h6>{userProfile.userPosts.length}</h6>
+                      <h6>posts</h6>
+                    </div>
+                  )}
+                  {userProfile.oneUser.followers.length === 1 ? (
+                    <div className="flex flex-col items-center">
+                      <h6>{userProfile.oneUser.followers.length}</h6>
+                      <h6>follower</h6>
+                    </div>
+                  ) : (
+                    <div className="flex flex-col items-center">
+                      <h6>{userProfile.oneUser.followers.length}</h6>
+                      <h6>followers</h6>
+                    </div>
+                  )}
+                  <div className="flex flex-col items-center">
+                    <h6>{userProfile.oneUser.following.length}</h6>
+                    <h6>following</h6>
+                  </div>
+                </div>
 
                 {/* follow/unfollow button */}
                 {showFollow ? (
