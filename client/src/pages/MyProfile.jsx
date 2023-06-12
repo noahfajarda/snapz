@@ -57,10 +57,38 @@ export default function MyProfile() {
               <h4>{state && state.name}</h4>
               <h4>{state && state.email}</h4>
 
-              <div className="flex justify-between w-full">
-                <h6>{myPosts.length} posts</h6>
-                <h6>{state && state.followers.length} followers</h6>
-                <h6>{state && state.following.length} following</h6>
+              <div
+                className="flex justify-between py-4"
+                style={{
+                  width: "108%",
+                }}
+              >
+                {myPosts.length === 1 ? (
+                  <div className="flex flex-col items-center">
+                    <h6>{myPosts.length}</h6>
+                    <h6>post</h6>
+                  </div>
+                ) : (
+                  <div className="flex flex-col items-center">
+                    <h6>{myPosts.length}</h6>
+                    <h6>posts</h6>
+                  </div>
+                )}
+                {state && state.followers.length === 1 ? (
+                  <div className="flex flex-col items-center">
+                    <h6>{state.followers.length}</h6>
+                    <h6>follower</h6>
+                  </div>
+                ) : (
+                  <div className="flex flex-col items-center">
+                    <h6>{state.followers.length}</h6>
+                    <h6>followers</h6>
+                  </div>
+                )}
+                <div className="flex flex-col items-center">
+                  <h6>{state && state.followers.length}</h6>
+                  <h6>following</h6>
+                </div>
               </div>
             </div>
           </div>
