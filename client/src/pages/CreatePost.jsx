@@ -8,6 +8,8 @@ import {
 // components
 import FileTypeDropdown from "../components/CreatePost/FileTypeDropdown/FileTypeDropdown";
 import FileInput from "../components/CreatePost/FileInput";
+// loading svg
+import loadingGIF from "../spinner.svg";
 
 export default function CreatePost() {
   const navigate = useNavigate();
@@ -30,17 +32,23 @@ export default function CreatePost() {
 
   // post with data will be created ONLY WHEN assetUrl is set
   useEffect(() => {
-    if (!state.assetUrl) return;
+    if (!state.assetUrl) {
+      setLoadingText("");
+      document.getElementById("create-loading").style.display = "none";
+      return;
+    }
 
     // create the new post
     createPost(state, navigate);
     setLoadingText("Post Created!");
+    document.getElementById("create-loading").style.display = "none";
   }, [state.assetUrl, navigate, state]);
 
   // function for form submission
   const handlePostSubmit = async (e) => {
     e.preventDefault();
-    setLoadingText("Loading...");
+    setLoadingText("Creating Post...");
+    document.getElementById("create-loading").style.display = "block";
 
     try {
       // post asset to cloudinary DB
@@ -83,7 +91,16 @@ export default function CreatePost() {
           >
             Submit Post
           </button>
-          <div>{loadingText}</div>
+          <div className="flex flex-col pt-6 justify-center items-center">
+            <div>{loadingText}</div>
+            <img
+              src={loadingGIF}
+              id="create-loading"
+              height="60px"
+              width="60px"
+              alt="React Logo"
+            />
+          </div>
         </form>
       </div>
     </React.Fragment>

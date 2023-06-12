@@ -146,6 +146,7 @@ nav i.material-icons {
   top: 30px !important;
   left: 20px !important;
   right: auto !important;
+  height: 5%;
 }
 
 /* hover transition for button */
@@ -156,6 +157,10 @@ button.bg-sky-300 {
 button.bg-sky-300:hover {
   background-color: rgb(76, 170, 191);
   color: white;
+}
+
+#create-loading {
+  display: none;
 }
 
 /* default styling */
