@@ -194,7 +194,8 @@ export default function Navbar() {
             onChange={(e) => fetchUsers(e.target.value)}
           />
           <ul className="flex flex-col">
-            {userDetails?.user &&
+            {userDetails.length !== undefined &&
+              userDetails?.user &&
               userDetails?.user.map((item) => (
                 <Link
                   className="flex pt-4 pb-4"
