@@ -201,4 +201,10 @@ h6 {
   .brand-logo {
     font-size: 6.5vw;
   }
+  .user-name-search {
+    font-size: 20px;
+  }
+  .user-email-search {
+    font-size: 14px;
+  }
 }

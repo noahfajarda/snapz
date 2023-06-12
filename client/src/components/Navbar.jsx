@@ -215,9 +215,8 @@ export default function Navbar() {
                     }
                   }}
                 >
-                  {/* <li className="collection-item text-black">{item.email}</li> */}
                   <img
-                    className="w-14 h-14 rounded-full mr-6 outline outline-offset-2 outline-slate-500"
+                    className="sm:w-14 sm:h-14 sm:mr-6 w-10 h-10 rounded-full mr-2 outline outline-offset-2 outline-slate-500"
                     src={
                       item.profilePicURL
                         ? item.profilePicURL
@@ -225,9 +224,11 @@ export default function Navbar() {
                     }
                     alt=""
                   />
-                  <div className="flex flex-col ml-6">
-                    <h1 className="text-black">{item.name}</h1>
-                    <h3 className="text-slate-500">{item.email}</h3>
+                  <div className="sm:ml-6 flex flex-col ml-2">
+                    <h1 className="text-black user-name-search">{item.name}</h1>
+                    <h3 className="text-slate-500 user-email-search">
+                      {item.email}
+                    </h3>
                   </div>
                 </Link>
               ))}
