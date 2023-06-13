@@ -2,7 +2,7 @@
 
 # <img src="./client/public/snapz-logo.png" alt="logo" width="40"/> **Snapz**
 
-### WebApp Link: https://snapz.herokuapp.com/
+### WebApp Link: <a href="https://snapz.herokuapp.com/" target="_blank">https://snapz.herokuapp.com/</a>
 
 ## Social Media Application build using ReactJS and ExpressJS.
 
