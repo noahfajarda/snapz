@@ -1,81 +1,85 @@
-technologies used:
+<div align="center">
 
-- materialize
-- react-router-dom
-- bcrypt
-- jwt
-- cloudinary
-- tailwind
-- nodemailer
-- 'crypto' for emails
-- Heroku (https://dashboard.heroku.com/apps/new-social-media/settings)
+# <img src="./client/public/snapz-logo.png" alt="logo" width="40"/> **Snapz**
 
-TODO:
-replace local storage 'setItem' with context variables soon
-be able to sign in with email OR username
-create an alternative name
+### WebApp Link: https://snapz.herokuapp.com/
 
-deployed App: https://new-social-media.herokuapp.com/
+## Social Media Application build using ReactJS and ExpressJS.
 
-video compression for posting longer videos: https://www.veed.io/edit/7e2a803c-c288-4c4c-9765-b137d682ec02/compress?source=%2Ftools%2Fvideo-compressor%2Fcompress-mov
+</div>
 
-# Snapz
+<br />
 
-## Link To Deployed Application
+## Tech Stack
 
-Click [here](https://new-social-media.herokuapp.com/) to view the deployed application.
+<code><img height="50" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/react/react.png" alt="react"></code>
+&nbsp;
+<code><img height="50" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/javascript/javascript.png" alt="javascript"></code>
+&nbsp;
+<code><img height="50" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/material-design/material-design.png" alt="javascript"></code>
+&nbsp;
+<code><img height="50" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/tailwind/tailwind.png" alt="tailwind"></code>
+<code><img height="50" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/npm/npm.png" alt="tailwind"></code>
 
-## Table of Contents
+## Additional Technologies
 
-- [Project description](#description)
-- [Installation](#installation)
-- [License](#license)
-- [Contributors](#contributors)
-- [Meet the team](#team)
+- <img height="25" src="https://reactrouter.com/_brand/react-router-mark-color.png" alt="react-router"> React Router
+- <img height="25" src="https://seeklogo.com/images/M/materialize-logo-0FCAD8A6F8-seeklogo.com.png" alt="materialize"> Materialize
+- <img height="25" src="https://seeklogo.com/images/J/jwt-logo-65D86B4640-seeklogo.com.png" alt="JWT"> JavaScript Web Token
+- <img height="25" src="https://seeklogo.com/images/C/cloudinary-logo-91D46BA298-seeklogo.com.png" alt="cloudinary"> Cloudinary
+- <img height="25" src="https://i0.wp.com/community.nodemailer.com/wp-content/uploads/2015/10/n2-2.png?fit=422%2C360&ssl=1" alt="nodemailer"> Nodemailer
+- Bcrypt
+- Crypto
+- <a href="https://dashboard.heroku.com/apps/snapz">Heroku</a>
 
-## Description
-
-A social media app where users can share moments in time through photos and videos and their thoughts about them with friends! Connect and keep up to date with what friends are doing.
-
-## Installation
-
-For Windows, please download and install [git](https://git-scm.com/downloads) and [Node.js](https://nodejs.org/en/download/).
-
-macOS users will need to install [Homebrew](https://brew.sh/). Then, run `brew install git` to install git, and `brew install node` to install Node.js.
-
-Linux/BSD users should use their appropriate package managers to install git and Node.js, or build from source if you swing that way.
-
-After that, [clone the Application](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository).
-
-When the cloning is done, open the Integrated Terminal in the respective directory.
-
-Run the following command in the terminal to install the packages:
+## Build Setup
 
 ```bash
+# install dependencies
 npm install
-```
 
-To send API calls, it would be very useful to download an API client (ie. Insomnia)
+# runs the app in the development mode.
+npm run start
+
+# builds the app for production to the build folder.
+npm run build
+```
 
 ## Visuals
 
-![Screen shot of the home page](https://github.com/noahfajarda/Project-2-Juke-Joint/blob/noah-branch/assets/screenshots/for-README/Homepage.png)
-![Screen shot of the login page](https://github.com/noahfajarda/Project-2-Juke-Joint/blob/noah-branch/assets/screenshots/for-README/Login%20Page.png)
-![Screen shot of track search results](https://github.com/noahfajarda/Project-2-Juke-Joint/blob/noah-branch/assets/screenshots/for-README/Track%20search2.png)
-![Screen shot of artist search results](https://github.com/noahfajarda/Project-2-Juke-Joint/blob/noah-branch/assets/screenshots/for-README/Artist%20search2.png)
-![Screen shot of album search results](https://github.com/noahfajarda/Project-2-Juke-Joint/blob/noah-branch/assets/screenshots/for-README/Album%20search.png)
-![Screen shot of likes page](https://github.com/noahfajarda/Project-2-Juke-Joint/blob/noah-branch/assets/screenshots/for-README/Likes%20page2.png)
-![Screen shot of the playlist page](https://github.com/noahfajarda/Project-2-Juke-Joint/blob/noah-branch/assets/screenshots/for-README/Playlist%20page2.png)
-![Screen shot of the lyrics and comments](https://github.com/noahfajarda/Project-2-Juke-Joint/blob/noah-branch/assets/screenshots/for-README/Song%20search%20with%20lyrics%20and%20comments2.png)
+<div>
+
+<img src="./client/public/app-snapshot-1.png" alt="screenshot1" width="600"/>
+<img src="./client/public/app-snapshot-2.png" alt="screenshot1" width="300"/>
+
+</div>
+
+## Deploys
+
+[![Heroku](https://img.shields.io/badge/heroku-%23430098.svg?style=for-the-badge&logo=heroku&logoColor=white)](https://dashboard.heroku.com/apps/snapz)
+
+## Contributing
+
+Feel free to dive in! [Open an issue](https://github.com/noahfajarda/snapz/issues/new) or submit PRs.
 
 ## Licensing
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-## QUESTIONS
+## Notes
+
+Optimize video uploads <a href="https://www.veed.io/edit/ca50d6ab-ef27-4fb6-9298-172ec99a0520/media">here</a>!
+
+## Questions
 
 If you have any questions or concerns, please contact me through my email below:
 
 noahfajarda1@gmail.com
 
+or through my github:
+
 [https://github.com/noahfajarda](https://github.com/noahfajarda)
+
+TODO:
+replace local storage 'setItem' with context variables soon
+be able to sign in with email OR username
