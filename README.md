@@ -4,7 +4,7 @@
 
 ### WebApp Link: <a href="https://snapz.herokuapp.com/" target="_blank">https://snapz.herokuapp.com/</a>
 
-## Social Media Application build using ReactJS and ExpressJS.
+## Social Media Application built using ReactJS and ExpressJS.
 
 </div>
 
