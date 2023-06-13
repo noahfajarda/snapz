@@ -7,6 +7,8 @@ import {
   unfollowUser,
 } from "../utils/APICalls/UserProfileAPICalls";
 import UserPosts from "../components/ProfilePages/UserPosts";
+// loading svg
+import loadingGIF from "../spinner.svg";
 
 export default function UserProfile() {
   const [userProfile, setUserProfile] = useState(null);
@@ -126,7 +128,16 @@ export default function UserProfile() {
           <UserPosts posts={userProfile.userPosts} />
         </div>
       ) : (
-        <h2>Loading... </h2>
+        <div className="flex justify-center p-16">
+          <h2>Loading...</h2>
+          <img
+            src={loadingGIF}
+            id="create-loading"
+            height="60px"
+            width="60px"
+            alt="React Logo"
+          />
+        </div>
       )}
     </>
   );

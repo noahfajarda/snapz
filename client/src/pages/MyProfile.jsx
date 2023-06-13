@@ -5,6 +5,8 @@ import {
   uploadNewProfilePic,
 } from "../utils/APICalls/ProfileAPICalls";
 import UserPosts from "../components/ProfilePages/UserPosts";
+// loading svg
+import loadingGIF from "../spinner.svg";
 
 export default function MyProfile() {
   // retrieve user data from context
@@ -96,7 +98,16 @@ export default function MyProfile() {
           <UserPosts posts={myPosts} />
         </div>
       ) : (
-        <h2>Loading... </h2>
+        <div className="flex justify-center p-16">
+          <h2>Loading...</h2>
+          <img
+            src={loadingGIF}
+            id="create-loading"
+            height="60px"
+            width="60px"
+            alt="React Logo"
+          />
+        </div>
       )}
     </>
   );
