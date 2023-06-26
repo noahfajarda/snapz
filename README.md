@@ -1,6 +1,6 @@
 <div align="center">
 
-# <img src="./client/public/snapz-logo.png" alt="logo" width="40"/> **Snapz**
+# <img src="./client/public/snapz-logo.png" alt="logo" width="40"/></br> **Snapz**
 
 ### WebApp Link: <a href="https://snapz.herokuapp.com/" target="_blank">https://snapz.herokuapp.com/</a>
 
