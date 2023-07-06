@@ -24,7 +24,6 @@ nav i.material-icons {
 .hamburger,
 .navigation-menu,
 .mobile-section {
-  display: none;
   color: black;
 }
 
@@ -79,6 +78,7 @@ nav i.material-icons {
   .navigation-menu li {
     text-align: center;
     margin: 0;
+    width: 100%;
     border-top: solid black;
   }
 
@@ -93,7 +93,7 @@ nav i.material-icons {
   }
 
   .navigation-menu.expanded {
-    display: block;
+    display: flex;
   }
   .navigation-menu.expanded ul {
     display: flex;

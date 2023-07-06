@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import capitalizeFirstLetter from "../utils/capitalizeFirstLetter";
 import { UserContext } from "../App";
 import M from "materialize-css";
+import { motion } from "framer-motion";
 
 export default function Navbar() {
   const navigate = useNavigate();
@@ -127,7 +128,13 @@ export default function Navbar() {
             isNavExpanded ? "navigation-menu expanded" : "navigation-menu"
           }
         >
-          <ul>
+          <motion.ul
+          className="flex flex-row"
+          animate={{
+            height: isNavExpanded ? "fit-content" : 0
+          }}
+          style={{overflow: 'hidden'}}
+          >
             {pages.map((page, idx) => {
               const bool = loggedIn === page.loggedIn;
               if (bool) {
@@ -149,7 +156,7 @@ export default function Navbar() {
               }
               return <div key={idx}></div>;
             })}
-          </ul>
+          </motion.ul>
         </div>
         {/* mobile nav button */}
         <div className="flex mobile-nav-container">
