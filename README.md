@@ -26,6 +26,7 @@
 - <img height="25" src="https://reactrouter.com/_brand/react-router-mark-color.png" alt="react-router"> React Router
 - <img height="25" src="https://seeklogo.com/images/M/materialize-logo-0FCAD8A6F8-seeklogo.com.png" alt="materialize"> Materialize
 - <img height="25" src="https://seeklogo.com/images/J/jwt-logo-65D86B4640-seeklogo.com.png" alt="JWT"> JavaScript Web Token
+- <img height="25" src="https://seeklogo.com/images/F/framer-motion-logo-DA1E33CAA1-seeklogo.com.png" alt="react-router"> Framer Motion
 - <img height="25" src="https://seeklogo.com/images/C/cloudinary-logo-91D46BA298-seeklogo.com.png" alt="cloudinary"> Cloudinary
 - <img height="25" src="https://i0.wp.com/community.nodemailer.com/wp-content/uploads/2015/10/n2-2.png?fit=422%2C360&ssl=1" alt="nodemailer"> Nodemailer
 - Bcrypt
