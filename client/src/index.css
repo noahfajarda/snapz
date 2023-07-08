@@ -26,6 +26,9 @@ nav i.material-icons {
 .mobile-section {
   color: black;
 }
+.mobile-section {
+  display: none;
+}
 
 @media screen and (max-width: 800px) {
   #nav-mobile {
