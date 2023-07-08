@@ -26,6 +26,12 @@ nav i.material-icons {
 .mobile-section {
   color: black;
 }
+.hamburger-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
 .mobile-section {
   display: none;
 }
