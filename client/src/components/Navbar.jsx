@@ -78,6 +78,9 @@ export default function Navbar() {
           // conditional for logo
           to={state ? "/" : "/login"}
           className="brand-logo px-3"
+          onClick={() => {
+            setIsNavExpanded(false);
+          }}
         >
           Snapz
         </Link>
